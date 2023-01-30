@@ -5,5 +5,8 @@ public class Main {
         System.out.println("Still working?");
         System.out.println("fdms");
         System.out.println("gfdsgfds");
+        for (int i = 0; i < 10; i++) {
+            System.out.println("PLEASE");
+        }
     }
 }
