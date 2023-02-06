@@ -23,8 +23,8 @@ public class JumpyBirb extends ApplicationAdapter {
 		camera.setToOrtho(false, 800, 480);
 		batch = new SpriteBatch();
 		birb = new Rectangle();
-		birb.x = 200;
-		birb.y = 20;
+		birb.x = 400 / 2 - 64 / 2;
+		birb.y = 240;
 		birb.width = 64;
 		birb.height = 64;
 
@@ -38,12 +38,18 @@ public class JumpyBirb extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(birbImage, birb.x, birb.y);
 		batch.end();
-		if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) birb.y += 2500 * Gdx.graphics.getDeltaTime();
-		birb.y -= 90 * Gdx.graphics.getDeltaTime();
+		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) birb.y += 2500 * Gdx.graphics.getDeltaTime();
+		if (birb.y > 0){
+			birb.y -= 90 * Gdx.graphics.getDeltaTime();
+		}
+		if (birb.y > 440) {
+			birb.y = 440;
+		}
+
 	}
 	
 	@Override
 	public void dispose () {
-
+		birbImage.dispose();
 	}
 }
