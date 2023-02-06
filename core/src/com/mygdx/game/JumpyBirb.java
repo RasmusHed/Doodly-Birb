@@ -36,8 +36,10 @@ public class JumpyBirb extends ApplicationAdapter {
 		batch.setProjectionMatrix(camera.combined);
 
 		batch.begin();
-		if (birb.getPosistion().y > 5) {
-			birb.gravity();
+		birb.gravity();
+
+		if (birb.getPosistion().y < 5) {
+			birb.setYPosistion(5);
 		}
 		batch.draw(birb.getTexture(), birb.getPosistion().x, birb.getPosistion().y);
 		batch.end();
