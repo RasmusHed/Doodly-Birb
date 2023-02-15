@@ -7,6 +7,8 @@ import com.badlogic.gdx.math.Vector3;
 
 public class Birb {
     private Texture birb;
+
+
     private Vector3 posistion;
     private Vector3 velocity;
     private static final float GRAVITY = - 0.234f;
@@ -36,4 +38,10 @@ public class Birb {
     public Vector3 getPosistion() {
         return posistion;
     }
+
+
+    public void setYPosistion(float posistion) {
+        this.posistion.y = posistion;
+    }
 }
+
