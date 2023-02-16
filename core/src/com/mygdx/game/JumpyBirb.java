@@ -14,14 +14,12 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class JumpyBirb extends ApplicationAdapter {
-	//private Texture birbImage;
-	//private Rectangle birb;
 	private Birb birb;
 	private OrthographicCamera camera;
 	private SpriteBatch batch;
 
 	private static final int TUBE_SPACING = 125;
-	private static final int TUBE_COUNT = 4;
+	private static final int TUBE_COUNT = 5;
 	private Tube tube;
 	private Array<Tube> tubes;
 
@@ -33,11 +31,11 @@ public class JumpyBirb extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		birb = new Birb(150, 240);
 
+		// Generates five tubes and adds 400 to the start x position
 		tubes = new Array<Tube>();
 		for(int i = 1; i <= TUBE_COUNT; i++){
-			tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH)));
+			tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH) + 400));
 		}
-
 	}
 
 	@Override
@@ -77,10 +75,7 @@ public class JumpyBirb extends ApplicationAdapter {
 			if(camera.position.x - (camera.viewportWidth / 2) > tube.getPosTopTube().x + tube.getTopTube().getWidth()){
 				tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
 			}
-
 		}
-
-
 	}
 	@Override
 	public void dispose () {
