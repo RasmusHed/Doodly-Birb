@@ -44,16 +44,22 @@ public class JumpyBirb extends ApplicationAdapter {
 	public void render () {
 		ScreenUtils.clear(0, 0, 0.2f, 1);
 
+		//camera and birb moves to the right in synch (x-position + 1)
+		//which makes it look like the tubes move to the left
 		camera.position.x = camera.position.x + 1;
+		birb.setXPosistion(birb.getPosistion().x + 1);
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
 
 		batch.begin();
 		birb.gravity();
 
+		//birb cant move below the screen
 		if (birb.getPosistion().y < 5) {
 			birb.setYPosistion(5);
 		}
+
+
 		batch.draw(birb.getTexture(), birb.getPosistion().x, birb.getPosistion().y);
 		//draw the tubes.
 		for (Tube tube: tubes) {
@@ -62,6 +68,7 @@ public class JumpyBirb extends ApplicationAdapter {
 		}
 		batch.end();
 
+		//makes the birb jump, but not when its too far above the screen
 		if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && birb.getPosistion().y < 470) {
 			birb.jump();
 		}

@@ -43,5 +43,9 @@ public class Birb {
     public void setYPosistion(float posistion) {
         this.posistion.y = posistion;
     }
+
+    public void setXPosistion(float posistion) {
+        this.posistion.x = posistion;
+    }
 }
 
