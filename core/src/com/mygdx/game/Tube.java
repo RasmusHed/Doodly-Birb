@@ -22,8 +22,8 @@ public class Tube {
         return posBotTube;
     }
 
-    private static final int FLUCTUATION = 130;
-    private static final int TUBE_GAP = 100;
+    private static final int FLUCTUATION = 170;
+    private static final int TUBE_GAP = 150;
     private static final int LOWEST_OPENING = 120;
     private Texture topTube, bottomTube;
     private Vector2 posTopTube, posBotTube;
