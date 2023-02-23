@@ -48,7 +48,6 @@ public class GameScreen implements Screen {
         birb.setXPosistion(birb.getPosistion().x + 1);
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
-
         game.batch.begin();
         birb.gravity();
 
@@ -57,22 +56,28 @@ public class GameScreen implements Screen {
             birb.setYPosistion(5);
         }
 
-
+        //draw the birb and update the rectangle position
         game.batch.draw(birb.getTexture(), birb.getPosistion().x, birb.getPosistion().y);
+        birb.setBirbRectangle(birb.getPosistion().x, birb.getPosistion().y);
+
         //draw the tubes.
-        for (Tube tube: tubes) {
-            game.batch.draw(tube.getTopTube(), tube.getPosTopTube().x, tube.getPosTopTube().y);
-            game.batch.draw(tube.getBottomTube(), tube.getPosBotTube().x, tube.getPosBotTube().y);
+        for (Tube tube : tubes) {
+            game.batch.draw(tube.getTopTubeTexture(), tube.getPosTopTube().x, tube.getPosTopTube().y);
+            game.batch.draw(tube.getBottomTubeTexture(), tube.getPosBotTube().x, tube.getPosBotTube().y);
+
+            if (birb.getBirbRectangle().overlaps(tube.getBottomTubeBox()) || birb.getBirbRectangle().overlaps(tube.getTopTubeBox())) {
+                birb.jump();
+            }
         }
         game.batch.end();
 
-        //makes the birb jump, but not when its too far above the screen
+        //makes the birb jump, but not when it's too far above the screen
         if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && birb.getPosistion().y < 470) {
             birb.jump();
         }
-
-        for(Tube tube : tubes){
-            if(camera.position.x - (camera.viewportWidth / 2) > tube.getPosTopTube().x + tube.getTopTube().getWidth()){
+        //respawns the tubes
+        for (Tube tube : tubes) {
+            if (camera.position.x - (camera.viewportWidth / 2) > tube.getPosTopTube().x + tube.getTopTubeTexture().getWidth()) {
                 tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
             }
         }

@@ -1,15 +1,11 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.*;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
+
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+
+import com.badlogic.gdx.Game;
+
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Interpolation;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 public class JumpyBirb extends Game {
 	public SpriteBatch batch;
@@ -33,6 +29,7 @@ public class JumpyBirb extends Game {
 	public void dispose () {
 
 	}
+
 }
 
 

@@ -1,14 +1,14 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 
 
 public class Birb {
+    private Rectangle birbRectangle;
     private Texture birb;
-
-
     private Vector3 posistion;
     private Vector3 velocity;
     private static final float GRAVITY = - 0.234f;
@@ -19,6 +19,12 @@ public class Birb {
         posistion = new Vector3(x, y, 0);
         velocity = new Vector3(10, 0, 0);
         birb = new Texture("birbIcon.png");
+
+        birbRectangle = new Rectangle();
+        birbRectangle.height = 50;
+        birbRectangle.width = 50;
+        birbRectangle.x = getPosistion().x;
+        birbRectangle.y = getPosistion().y;
     }
 
     public void gravity() {
@@ -46,6 +52,15 @@ public class Birb {
 
     public void setXPosistion(float posistion) {
         this.posistion.x = posistion;
+    }
+
+    public Rectangle getBirbRectangle() {
+        return birbRectangle;
+    }
+
+    public void setBirbRectangle(float x, float y) {
+        this.birbRectangle.x = x;
+        this.birbRectangle.y = y;
     }
 }
 
