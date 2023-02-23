@@ -1,11 +1,9 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
@@ -13,34 +11,41 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-public class JumpyBirb extends ApplicationAdapter {
-	private Birb birb;
+public class JumpyBirb extends Game {
+	public SpriteBatch batch;
+	public BitmapFont font;
+	/*private Birb birb;
 	private OrthographicCamera camera;
-	private SpriteBatch batch;
 
 	private static final int TUBE_SPACING = 125;
 	private static final int TUBE_COUNT = 5;
 	private Tube tube;
-	private Array<Tube> tubes;
+	private Array<Tube> tubes;*/
 
 
 	@Override
 	public void create () {
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, 800, 480);
+		font = new BitmapFont();
 		batch = new SpriteBatch();
+
+		this.setScreen(new MainMenuScreen(this));
+
+		/*camera = new OrthographicCamera();
+		camera.setToOrtho(false, 800, 480);
+
 		birb = new Birb(150, 240);
 
 		// Generates five tubes and adds 400 to the start x position
 		tubes = new Array<Tube>();
 		for(int i = 1; i <= TUBE_COUNT; i++){
 			tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH) + 400));
-		}
+		}*/
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(0, 0, 0.2f, 1);
+		super.render();
+		/*ScreenUtils.clear(0, 0, 0.2f, 1);
 
 		//camera and birb moves to the right in synch (x-position + 1)
 		//which makes it look like the tubes move to the left
@@ -75,7 +80,7 @@ public class JumpyBirb extends ApplicationAdapter {
 			if(camera.position.x - (camera.viewportWidth / 2) > tube.getPosTopTube().x + tube.getTopTube().getWidth()){
 				tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
 			}
-		}
+		}*/
 	}
 	@Override
 	public void dispose () {
