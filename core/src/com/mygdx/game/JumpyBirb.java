@@ -17,7 +17,6 @@ public class JumpyBirb extends Game {
 		batch = new SpriteBatch();
 
 		this.setScreen(new MainMenuScreen(this));
-
 	}
 
 	@Override
