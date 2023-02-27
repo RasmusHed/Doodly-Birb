@@ -32,7 +32,7 @@ public class Deathscreen implements Screen {
         game.font.draw(game.batch, "Press space to play again", 100,90);
         game.batch.end();
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+        if(Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             game.setScreen(new GameScreen(game));
             dispose();
         }
