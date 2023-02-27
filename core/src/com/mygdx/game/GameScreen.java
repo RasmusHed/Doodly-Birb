@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
+import javax.swing.event.MouseInputAdapter;
+
 public class GameScreen implements Screen {
     final JumpyBirb game;
     final Deathscreen death;
@@ -66,7 +68,7 @@ public class GameScreen implements Screen {
         for (Tube tube : tubes) {
             game.batch.draw(tube.getTopTubeTexture(), tube.getPosTopTube().x, tube.getPosTopTube().y);
             game.batch.draw(tube.getBottomTubeTexture(), tube.getPosBotTube().x, tube.getPosBotTube().y);
-            
+
             // check if birb overlaps with tubes, in that case call deathscreen
             if (birb.getBirbRectangle().overlaps(tube.getBottomTubeBox()) || birb.getBirbRectangle().overlaps(tube.getTopTubeBox())) {
                 game.setScreen(new Deathscreen(game));
@@ -75,7 +77,7 @@ public class GameScreen implements Screen {
         game.batch.end();
 
         //makes the birb jump, but not when it's too far above the screen
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && birb.getPosistion().y < 470) {
+        if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && birb.getPosistion().y < 470) {
             birb.jump();
         }
         //respawns the tubes
