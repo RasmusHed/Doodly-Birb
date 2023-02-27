@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class GameScreen implements Screen {
     final JumpyBirb game;
+    final Deathscreen death;
     private Birb birb;
     private OrthographicCamera camera;
     private static final int TUBE_SPACING = 125;
@@ -31,6 +32,7 @@ public class GameScreen implements Screen {
         for(int i = 1; i <= TUBE_COUNT; i++){
             tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH) + 400));
         }
+        death = new Deathscreen(game);
     }
 
     @Override
@@ -64,9 +66,9 @@ public class GameScreen implements Screen {
         for (Tube tube : tubes) {
             game.batch.draw(tube.getTopTubeTexture(), tube.getPosTopTube().x, tube.getPosTopTube().y);
             game.batch.draw(tube.getBottomTubeTexture(), tube.getPosBotTube().x, tube.getPosBotTube().y);
-
+            // check if birb overlaps with tubes, in that case call deathscreen
             if (birb.getBirbRectangle().overlaps(tube.getBottomTubeBox()) || birb.getBirbRectangle().overlaps(tube.getTopTubeBox())) {
-                birb.jump();
+                game.setScreen(new Deathscreen(game));
             }
         }
         game.batch.end();
