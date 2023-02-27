@@ -23,9 +23,9 @@ public class Tube {
         return posBotTube;
     }
     //How far the gap can move
-    private static final int FLUCTUATION = 190;
+    private static final int FLUCTUATION = 280;
     private static final int TUBE_GAP = 150;
-    private static final int LOWEST_OPENING = 120;
+    private static final int LOWEST_OPENING = 30;
     private Rectangle topTubeBox;
     private Rectangle bottomTubeBox;
     private Texture topTubeTexture, bottomTubeTexture;
