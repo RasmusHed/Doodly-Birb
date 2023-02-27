@@ -66,6 +66,7 @@ public class GameScreen implements Screen {
         for (Tube tube : tubes) {
             game.batch.draw(tube.getTopTubeTexture(), tube.getPosTopTube().x, tube.getPosTopTube().y);
             game.batch.draw(tube.getBottomTubeTexture(), tube.getPosBotTube().x, tube.getPosBotTube().y);
+            
             // check if birb overlaps with tubes, in that case call deathscreen
             if (birb.getBirbRectangle().overlaps(tube.getBottomTubeBox()) || birb.getBirbRectangle().overlaps(tube.getTopTubeBox())) {
                 game.setScreen(new Deathscreen(game));

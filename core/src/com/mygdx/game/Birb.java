@@ -21,8 +21,8 @@ public class Birb {
         birb = new Texture("birbIcon.png");
 
         birbRectangle = new Rectangle();
-        birbRectangle.height = 50;
-        birbRectangle.width = 50;
+        birbRectangle.height = 45;
+        birbRectangle.width = 45;
         birbRectangle.x = getPosistion().x;
         birbRectangle.y = getPosistion().y;
     }
