@@ -32,8 +32,8 @@ public class Tube {
     private Vector2 posTopTube, posBotTube;
     private Random rand;
     public Tube(float x){
-        topTubeTexture = new Texture("toptube.png");
-        bottomTubeTexture = new Texture("bottomtube.png");
+        topTubeTexture = new Texture("topdiscopipev1.png");
+        bottomTubeTexture = new Texture("bottomdiscopipev1.png");
         rand = new Random();
 
 
