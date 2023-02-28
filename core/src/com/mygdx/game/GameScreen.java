@@ -31,7 +31,7 @@ public class GameScreen implements Screen {
         tubes = new Array<Tube>();
 
         // Create the background
-        background = new Background(100);
+        background = new Background(0,0);
 
         for (int i = 1; i <= TUBE_COUNT; i++) {
             tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH) + 400));
@@ -48,25 +48,29 @@ public class GameScreen implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0.2f, 1);
 
-        //camera and birb moves to the right in synch (x-position + 1)
+        //camera moves to the right in synch (x-position + 1)
         //which makes it look like the tubes move to the left
         camera.position.x = camera.position.x + 1;
-        birb.setXPosistion(birb.getPosistion().x + 1);
         camera.update();
+
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
 
-        game.batch.draw(background.getBackgroundImage(), 0, 0);
-        birb.gravity();
+        //draw the background and move it one pixel to the right
+        game.batch.draw(background.getBackgroundImage(), background.getBackgroundPosistion().x, background.getBackgroundPosistion().y);
+        background.setBackgroundPosistion(background.getBackgroundPosistion().x + 1);
 
+        //draw the birb, set update the rectangle position and move birb one pixel to the right
+        game.batch.draw(birb.getTexture(), birb.getPosistion().x, birb.getPosistion().y);
+        birb.setBirbRectangle(birb.getPosistion().x, birb.getPosistion().y);
+        birb.setXPosistion(birb.getPosistion().x + 1);
+
+        birb.gravity();
         //birb cant move below the screen
         if (birb.getPosistion().y < 5) {
             birb.setYPosistion(5);
         }
 
-        //draw the birb and update the rectangle position
-        game.batch.draw(birb.getTexture(), birb.getPosistion().x, birb.getPosistion().y);
-        birb.setBirbRectangle(birb.getPosistion().x, birb.getPosistion().y);
 
         //draw the tubes.
         for (Tube tube : tubes) {
