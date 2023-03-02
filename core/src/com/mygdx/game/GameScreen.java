@@ -82,7 +82,7 @@ public class GameScreen implements Screen {
                 tubePair.reposition(tubePair.getTopTubePosition().x + ((TubePair.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
             }
             // check if birb overlaps with tubes, in that case call deathscreen
-            if (birb.getBirbRectangle().overlaps(tubePair.getBottomTubeHitBox()) || birb.getBirbRectangle().overlaps(tubePair.getTopTubeHitBox())) {
+            if (birb.getBirbHitBox().overlaps(tubePair.getBottomTubeHitBox()) || birb.getBirbHitBox().overlaps(tubePair.getTopTubeHitBox())) {
                 game.setScreen(new Deathscreen(game));
             }
         }
