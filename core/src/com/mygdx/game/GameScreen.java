@@ -8,15 +8,16 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class GameScreen implements Screen {
+    public static final int FIRST_TUBE_SPAWN_POSITION = 400;
     final JumpyBirb game;
     final Deathscreen death;
     private Birb birb;
     private OrthographicCamera camera;
     private static final int TUBE_SPACING = 125;
     private static final int TUBE_COUNT = 5;
-    private Tube tube;
+    private TubePair tubePair;
     public Background background;
-    private Array<Tube> tubes;
+    private Array<TubePair> tubes;
 
     public GameScreen(JumpyBirb game) {
         this.game = game;
@@ -28,13 +29,13 @@ public class GameScreen implements Screen {
         birb = new Birb(150, 240);
 
         // Generates five tubes and adds 400px to the start x position
-        tubes = new Array<Tube>();
+        tubes = new Array<TubePair>();
 
         // Create the background
         background = new Background(0,0);
 
         for (int i = 1; i <= TUBE_COUNT; i++) {
-            tubes.add(new Tube(i * (TUBE_SPACING + Tube.TUBE_WIDTH) + 400));
+            tubes.add(new TubePair(i * (TUBE_SPACING + TubePair.TUBE_WIDTH) + FIRST_TUBE_SPAWN_POSITION));
         }
         death = new Deathscreen(game);
     }
@@ -73,15 +74,15 @@ public class GameScreen implements Screen {
 
 
         //draw the tubes.
-        for (Tube tube : tubes) {
-            game.batch.draw(tube.getTopTubeTexture(), tube.getPosTopTube().x, tube.getPosTopTube().y);
-            game.batch.draw(tube.getBottomTubeTexture(), tube.getPosBotTube().x, tube.getPosBotTube().y);
+        for (TubePair tubePair : tubes) {
+            game.batch.draw(tubePair.getTopTubeTexture(), tubePair.getTopTubePosition().x, tubePair.getTopTubePosition().y);
+            game.batch.draw(tubePair.getBottomTubeTexture(), tubePair.getBottomTubePosition().x, tubePair.getBottomTubePosition().y);
             //respawns the tubes
-            if (camera.position.x - (camera.viewportWidth / 2) > tube.getPosTopTube().x + tube.getTopTubeTexture().getWidth()) {
-                tube.reposition(tube.getPosTopTube().x + ((Tube.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+            if (camera.position.x - (camera.viewportWidth / 2) > tubePair.getTopTubePosition().x + tubePair.getTopTubeTexture().getWidth()) {
+                tubePair.reposition(tubePair.getTopTubePosition().x + ((TubePair.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
             }
             // check if birb overlaps with tubes, in that case call deathscreen
-            if (birb.getBirbRectangle().overlaps(tube.getBottomTubeBox()) || birb.getBirbRectangle().overlaps(tube.getTopTubeBox())) {
+            if (birb.getBirbRectangle().overlaps(tubePair.getBottomTubeHitBox()) || birb.getBirbRectangle().overlaps(tubePair.getTopTubeHitBox())) {
                 game.setScreen(new Deathscreen(game));
             }
         }
