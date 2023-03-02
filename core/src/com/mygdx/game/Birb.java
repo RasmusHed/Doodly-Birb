@@ -1,40 +1,30 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 
-
 public class Birb {
-    private Rectangle birbRectangle;
+    private static final float GRAVITY = -0.234f;
+    private static final float JUMP = 8;
+    private static final int HITBOX_HEIGHT = 45;
+    private static final int HITBOX_WIDTH = 45;
+
+    private Rectangle birbHitBox;
     private Texture birb;
     private Vector3 posistion;
     private Vector3 velocity;
-    private static final float GRAVITY = - 0.234f;
-    private static final float JUMP = 8;
 
 
-    public Birb (int x, int y) {
+    public Birb(int x, int y) {
         posistion = new Vector3(x, y, 0);
         velocity = new Vector3(10, 0, 0);
         birb = new Texture("birbIcon.png");
 
-        birbRectangle = new Rectangle();
-        birbRectangle.height = 45;
-        birbRectangle.width = 45;
-        birbRectangle.x = getPosistion().x;
-        birbRectangle.y = getPosistion().y;
-    }
-
-    public void gravity() {
-        velocity.add(0, GRAVITY, 0);
-        posistion.add(0, velocity.y, 0);
-    }
-
-    public void jump() {
-        velocity.y = 15;
-        velocity.scl(0.4f);
+        setHitBox();
     }
 
     public Texture getTexture() {
@@ -45,6 +35,9 @@ public class Birb {
         return posistion;
     }
 
+    public Rectangle getBirbHitBox() {
+        return birbHitBox;
+    }
 
     public void setYPosistion(float posistion) {
         this.posistion.y = posistion;
@@ -54,13 +47,35 @@ public class Birb {
         this.posistion.x = posistion;
     }
 
-    public Rectangle getBirbRectangle() {
-        return birbRectangle;
-    }
 
     public void setBirbRectangle(float x, float y) {
-        this.birbRectangle.x = x;
-        this.birbRectangle.y = y;
+        this.birbHitBox.x = x;
+        this.birbHitBox.y = y;
+    }
+
+    private void setHitBox() {
+        birbHitBox = new Rectangle(getPosistion().x,
+                getPosistion().y,
+                HITBOX_WIDTH,
+                HITBOX_HEIGHT);
+    }
+
+    public void gravity() {
+        velocity.add(0, GRAVITY, 0);
+        posistion.add(0, velocity.y, 0);
+    }
+
+    public void jump() {
+        if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && getPosistion().y < 470) {
+            velocity.y = 15;
+            velocity.scl(0.4f);
+        }
+    }
+
+    public void cantGoBelowScreen() {
+        if (getPosistion().y < 5) {
+            setYPosistion(5);
+        }
     }
 }
 
