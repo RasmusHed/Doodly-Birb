@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
@@ -64,8 +66,16 @@ public class Birb {
     }
 
     public void jump() {
-        velocity.y = 15;
-        velocity.scl(0.4f);
+        if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && getPosistion().y < 470) {
+            velocity.y = 15;
+            velocity.scl(0.4f);
+        }
+    }
+
+    public void cantGoBelowScreen() {
+        if (getPosistion().y < 5) {
+            setYPosistion(5);
+        }
     }
 }
 
