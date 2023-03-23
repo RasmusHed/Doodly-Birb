@@ -9,7 +9,6 @@ import java.util.Random;
 public class TubePair {
     public static final int TUBE_WIDTH = 52;
     public static final int TUBE_HEIGHT = 320;
-
     private static final int GAP_POSITION_FLUCTUATION = 280;
     private static final int TUBE_GAP = 150;
     private static final int LOWEST_OPENING = 30;

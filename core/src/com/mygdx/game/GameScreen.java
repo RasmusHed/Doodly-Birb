@@ -9,9 +9,10 @@ public class GameScreen implements Screen {
     final JumpyBirb game;
     final Deathscreen death;
     final TubeBatch tubes;
-    private Birb birb;
-    private OrthographicCamera camera;
-    public Background background;
+    final Highscore score;
+    final Birb birb;
+    final OrthographicCamera camera;
+    final Background background;
 
     public GameScreen(JumpyBirb game) {
         this.game = game;
@@ -22,13 +23,16 @@ public class GameScreen implements Screen {
         // Create the birb
         birb = new Birb(150, SCREEN_HEIGHT/2);
 
+        // Start the highscore counter
+        score = new Highscore(SCREEN_WIDTH/2, SCREEN_HEIGHT - 80);
+
         // Generates five tubes and adds 400px to the start x position
         tubes = new TubeBatch();
 
         // Create the background
         background = new Background(0, 0);
 
-        death = new Deathscreen(game);
+        death = new Deathscreen(game, score);
     }
 
     @Override
@@ -52,17 +56,23 @@ public class GameScreen implements Screen {
         checkBirbHitTubes();
 
         //draw the background and move it one pixel to the right
-        game.batch.draw(background.getBackgroundImage(), background.getBackgroundPosistion().x, background.getBackgroundPosistion().y);
-        background.setBackgroundPosistion(background.getBackgroundPosistion().x + 1);
+        game.batch.draw(background.getBackgroundImage(), background.getBackgroundPosition().x, background.getBackgroundPosition().y);
+        background.setBackgroundPosition(background.getBackgroundPosition().x + 1);
 
         //draw the tubes
         tubes.spawnTubes(game);
         tubes.respawnTubesWhenOutOfScreen(camera);
 
+        //write score to gamescreen
+        game.font.draw(game.batch, "Your score: " + score.getScore(), score.getScorePosition().x, score.getScorePosition().y);
+        score.setScorePosition(score.getScorePosition().x + 1);
+
         //draw the birb, set update the rectangle position and move birb one pixel to the right
         game.batch.draw(birb.getTexture(), birb.getPosistion().x, birb.getPosistion().y);
         birb.setBirbRectangle(birb.getPosistion().x, birb.getPosistion().y);
         birb.setXPosistion(birb.getPosistion().x + 1);
+
+        score.setScore(birb.getPosistion().x);
 
         game.batch.end();
     }
@@ -96,7 +106,7 @@ public class GameScreen implements Screen {
     private void checkBirbHitTubes() {
         for (TubePair tubePair : tubes.getTubes()) {
             if (birb.getBirbHitBox().overlaps(tubePair.getBottomTubeHitBox()) || birb.getBirbHitBox().overlaps(tubePair.getTopTubeHitBox())) {
-                game.setScreen(new Deathscreen(game));
+                game.setScreen(new Deathscreen(game, score));
             }
         }
     }

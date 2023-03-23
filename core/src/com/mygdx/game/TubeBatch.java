@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Array;
 
 public class TubeBatch {
     public static final int FIRST_TUBE_SPAWN_POSITION = 400;
-    private static final int TUBE_SPACING = 125;
+    public static final int TUBE_SPACING = 125;
     private static final int TUBE_COUNT = 5;
     private Array<TubePair> tubes;
 

@@ -7,13 +7,13 @@ import com.badlogic.gdx.math.Vector2;
 public class Background {
     private static Texture backgroundImage;
     private static SpriteBatch spriteBatch;
-    private Vector2 backgroundPosistion;
+    private final Vector2 backgroundPosition;
 
 
     public Background(float x, float y) {
         spriteBatch = new SpriteBatch();
         backgroundImage = new Texture("firstBackground.png");
-        backgroundPosistion = new Vector2(x,y);
+        backgroundPosition = new Vector2(x,y);
     }
 
     public Texture getBackgroundImage() {
@@ -24,11 +24,11 @@ public class Background {
         return spriteBatch;
     }
 
-    public Vector2 getBackgroundPosistion() {
-        return backgroundPosistion;
+    public Vector2 getBackgroundPosition() {
+        return backgroundPosition;
     }
 
-    public void setBackgroundPosistion(float posistion) {
-        this.backgroundPosistion.x = posistion;
+    public void setBackgroundPosition(float position) {
+        this.backgroundPosition.x = position;
     }
 }
