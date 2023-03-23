@@ -8,9 +8,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Deathscreen implements Screen {
     final JumpyBirb game;
+    final Highscore score;
     OrthographicCamera camera;
-    public Deathscreen(final JumpyBirb game) {
+    public Deathscreen(final JumpyBirb game, final Highscore score) {
         this.game = game;
+        this.score = score;
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false,800,480);
@@ -29,7 +31,8 @@ public class Deathscreen implements Screen {
 
         game.batch.begin();
         game.font.draw(game.batch,"You Lost!", 100, 100);
-        game.font.draw(game.batch, "Press space to play again", 100,90);
+        game.font.draw(game.batch, "Press space to play again", 100,80);
+        game.font.draw(game.batch, "Your score: " + score.getScore(), 100, 60);
         game.batch.end();
 
         if(Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
