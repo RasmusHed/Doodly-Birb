@@ -9,11 +9,14 @@ import com.badlogic.gdx.utils.ScreenUtils;
 public class MainMenuScreen implements Screen {
 
     final JumpyBirb game;
+    final Background background;
 
     OrthographicCamera camera;
 
     public MainMenuScreen(final JumpyBirb game) {
         this.game = game;
+
+        background = new Background(0, 0);
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
@@ -27,13 +30,13 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0, 0, 0.2f, 1);
-
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.font.draw(game.batch, "Welcome to Drop!!! ", 100, 150);
+
+        game.batch.draw(background.getBackgroundImage(), background.getBackgroundPosition().x, background.getBackgroundPosition().y);
+        game.font.draw(game.batch, "JUMPY BIRB", 100, 150);
         game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
         game.batch.end();
 
