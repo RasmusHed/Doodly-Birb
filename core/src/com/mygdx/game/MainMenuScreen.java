@@ -37,8 +37,10 @@ public class MainMenuScreen implements Screen {
         game.batch.begin();
 
         game.batch.draw(background.getBackgroundImage(), background.getBackgroundPosition().x, background.getBackgroundPosition().y);
-        game.titleFont.draw(game.batch, "JUMPY BIRB", 100, 150);
-        game.titleFont.draw(game.batch, "Tap anywhere to begin!", 100, 100);
+        game.titleFont.draw(game.batch, "JUMPY BIRB", 100, 390);
+        game.mainFont.draw(game.batch, "Options", 270, 270);
+        game.mainFont.draw(game.batch, "Quit", 270, 190);
+        game.accentFont.draw(game.batch, "Tap anywhere to begin!", 100, 70);
         game.batch.end();
 
         if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {

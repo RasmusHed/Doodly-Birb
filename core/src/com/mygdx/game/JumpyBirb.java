@@ -10,12 +10,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class JumpyBirb extends Game {
 	public SpriteBatch batch;
 	public BitmapFont titleFont;
-	public BitmapFont scoreFont;
+	public BitmapFont mainFont;
+	public BitmapFont accentFont;
 
 	@Override
 	public void create () {
-		titleFont = new BitmapFont(Gdx.files.internal("font/coloredFont.fnt"));
-		scoreFont = new BitmapFont(Gdx.files.internal("font/boyrun.fnt"));
+		titleFont = new BitmapFont(Gdx.files.internal("font/boyrun.fnt"));
+		mainFont = new BitmapFont(Gdx.files.internal("font/mainFont.fnt"));
+		accentFont = new BitmapFont(Gdx.files.internal("font/coloredFont.fnt"));
 		batch = new SpriteBatch();
 
 		this.setScreen(new MainMenuScreen(this));
