@@ -30,9 +30,9 @@ public class Deathscreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.font.draw(game.batch,"You Lost!", 100, 100);
-        game.font.draw(game.batch, "Press space to play again", 100,80);
-        game.font.draw(game.batch, "Your score: " + score.getScore(), 100, 60);
+        game.titleFont.draw(game.batch,"You Lost!", 100, 400);
+        game.titleFont.draw(game.batch, "Press space to play again", 100,230);
+        game.titleFont.draw(game.batch, "Your score: " + score.getScore(), 100, 60);
         game.batch.end();
 
         if(Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {

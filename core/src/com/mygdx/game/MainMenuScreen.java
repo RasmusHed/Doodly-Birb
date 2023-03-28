@@ -20,6 +20,7 @@ public class MainMenuScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
+
     }
 
 
@@ -36,8 +37,8 @@ public class MainMenuScreen implements Screen {
         game.batch.begin();
 
         game.batch.draw(background.getBackgroundImage(), background.getBackgroundPosition().x, background.getBackgroundPosition().y);
-        game.font.draw(game.batch, "JUMPY BIRB", 100, 150);
-        game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
+        game.titleFont.draw(game.batch, "JUMPY BIRB", 100, 150);
+        game.titleFont.draw(game.batch, "Tap anywhere to begin!", 100, 100);
         game.batch.end();
 
         if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
