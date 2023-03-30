@@ -1,11 +1,14 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.mygdx.game.*;
+import com.mygdx.game.sprites.Background;
+import com.mygdx.game.sprites.Birb;
+import com.mygdx.game.sprites.TubeBatch;
+import com.mygdx.game.sprites.TubePair;
 
 public class GameScreen implements Screen {
-    public static final int SCREEN_WIDTH = 800;
-    public static final int SCREEN_HEIGHT = 480;
     final JumpyBirb game;
     final Deathscreen death;
     final TubeBatch tubes;
@@ -18,13 +21,13 @@ public class GameScreen implements Screen {
         this.game = game;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, SCREEN_WIDTH, SCREEN_HEIGHT);
+        camera.setToOrtho(false, Settings.SCREEN_WIDTH, Settings.SCREEN_HEIGHT);
 
         // Create the birb
-        birb = new Birb(150, SCREEN_HEIGHT/2);
+        birb = new Birb(150, Settings.SCREEN_HEIGHT/2);
 
         // Start the highscore counter
-        score = new Highscore(SCREEN_WIDTH/2, SCREEN_HEIGHT - 80);
+        score = new Highscore(Settings.SCREEN_WIDTH/2, Settings.SCREEN_HEIGHT - 80);
 
         // Generates five tubes and adds 400px to the start x position
         tubes = new TubeBatch();
@@ -42,9 +45,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        //camera moves to the right in synch (x-position + 1)
+        //camera moves to the right in sync (x-position + 1)
         //which makes it look like the tubes move to the left
-        camera.position.x = camera.position.x + 1;
+        camera.position.x += delta * Settings.DELTATIME;
         camera.update();
 
         game.batch.setProjectionMatrix(camera.combined);
@@ -57,7 +60,7 @@ public class GameScreen implements Screen {
 
         //draw the background and move it one pixel to the right
         game.batch.draw(background.getBackgroundImage(), background.getBackgroundPosition().x, background.getBackgroundPosition().y);
-        background.setBackgroundPosition(background.getBackgroundPosition().x + 1);
+        background.setBackgroundPosition(background.getBackgroundPosition().x += delta * Settings.DELTATIME);
 
         //draw the tubes
         tubes.spawnTubes(game);
@@ -65,12 +68,12 @@ public class GameScreen implements Screen {
 
         //write score to gamescreen
         game.titleFont.draw(game.batch, "" + score.getScore(), score.getScorePosition().x, score.getScorePosition().y);
-        score.setScorePosition(score.getScorePosition().x + 1);
+        score.setScorePosition(score.getScorePosition().x += delta * Settings.DELTATIME);
 
         //draw the birb, set update the rectangle position and move birb one pixel to the right
         game.batch.draw(birb.getTexture(), birb.getPosistion().x, birb.getPosistion().y);
         birb.setBirbRectangle(birb.getPosistion().x, birb.getPosistion().y);
-        birb.setXPosistion(birb.getPosistion().x + 1);
+        birb.setXPosistion(birb.getPosistion().x += delta * Settings.DELTATIME);
 
         score.setScore(birb.getPosistion().x);
 
