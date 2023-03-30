@@ -50,14 +50,14 @@ public class MainMenuScreen implements Screen {
 
         // Options button
         if (Gdx.input.justTouched() && Gdx.input.getX() >= OPTIONS_X && Gdx.input.getX() <= OPTIONS_X + 200 && Gdx.input.getY() >= OPTIONS_Y - 50 && Gdx.input.getY() <= OPTIONS_Y - 10) {
-            System.out.println("Working");
+            game.setScreen(new OptionsScreen(game));
         }
 
         // Quit button
-        if (Gdx.input.justTouched() && Gdx.input.getX() >= QUIT_X && Gdx.input.getX() <= QUIT_X + 120 && Gdx.input.getY() >= QUIT_Y + 110 && Gdx.input.getY() <= QUIT_Y + 150) {
+        else if (Gdx.input.justTouched() && Gdx.input.getX() >= QUIT_X && Gdx.input.getX() <= QUIT_X + 120 && Gdx.input.getY() >= QUIT_Y + 110 && Gdx.input.getY() <= QUIT_Y + 150) {
             Gdx.app.exit();
         }
-        if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+        else if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             game.setScreen(new GameScreen(game));
             dispose();
         }
