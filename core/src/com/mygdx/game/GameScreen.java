@@ -64,7 +64,7 @@ public class GameScreen implements Screen {
         tubes.respawnTubesWhenOutOfScreen(camera);
 
         //write score to gamescreen
-        game.font.draw(game.batch, "Your score: " + score.getScore(), score.getScorePosition().x, score.getScorePosition().y);
+        game.titleFont.draw(game.batch, "" + score.getScore(), score.getScorePosition().x, score.getScorePosition().y);
         score.setScorePosition(score.getScorePosition().x + 1);
 
         //draw the birb, set update the rectangle position and move birb one pixel to the right
