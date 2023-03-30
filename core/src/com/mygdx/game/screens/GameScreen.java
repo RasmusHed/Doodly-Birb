@@ -110,6 +110,7 @@ public class GameScreen implements Screen {
         for (TubePair tubePair : tubes.getTubes()) {
             if (birb.getBirbHitBox().overlaps(tubePair.getBottomTubeHitBox()) || birb.getBirbHitBox().overlaps(tubePair.getTopTubeHitBox())) {
                 game.setScreen(new Deathscreen(game, score));
+
             }
         }
     }
