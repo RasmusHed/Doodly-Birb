@@ -8,7 +8,7 @@ public class Settings {
     public static final int SCREEN_HEIGHT = 480;
 
     //TUBES
-    public static final int FIRST_TUBE_SPAWN_POSITION = 400;
+    public static final int FIRST_TUBE_SPAWN_POSITION = 350;
     public static int TUBE_SPACING = 175;
     public static final int TUBE_COUNT = 5;
     public static final int TUBE_WIDTH = 52;
@@ -25,19 +25,16 @@ public class Settings {
     public static void setDifficulty(String difficulty){
         if (difficulty.equals("EASY")){
             DELTATIME = 60;
-            TUBE_SPACING = 175;
             TUBE_GAP = 200;
             GAP_POSITION_FLUCTUATION = 230;
         }
         if (difficulty.equals("MEDIUM")){
             DELTATIME = 90;
-            TUBE_SPACING = 150;
             TUBE_GAP =175;
             GAP_POSITION_FLUCTUATION = 250;
         }
         if (difficulty.equals("HARD")){
             DELTATIME = 120;
-            TUBE_SPACING = 125;
             TUBE_GAP = 150;
             GAP_POSITION_FLUCTUATION = 270;
         }
