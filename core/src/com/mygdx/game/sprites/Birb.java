@@ -1,17 +1,14 @@
-package com.mygdx.game;
+package com.mygdx.game.sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.mygdx.game.Settings;
 
 
 public class Birb {
-    private static final float GRAVITY = -0.234f;
-    private static final float JUMP = 8;
-    private static final int HITBOX_HEIGHT = 45;
-    private static final int HITBOX_WIDTH = 45;
 
     private Rectangle birbHitBox;
     private Texture birb;
@@ -56,18 +53,18 @@ public class Birb {
     private void setHitBox() {
         birbHitBox = new Rectangle(getPosistion().x,
                 getPosistion().y,
-                HITBOX_WIDTH,
-                HITBOX_HEIGHT);
+                Settings.BIRB_HITBOX_WIDTH,
+                Settings.BIRB_HITBOX_HEIGHT);
     }
 
     public void gravity() {
-        velocity.add(0, GRAVITY, 0);
+        velocity.add(0, Settings.GRAVITY, 0);
         posistion.add(0, velocity.y, 0);
     }
 
     public void jump() {
         if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && getPosistion().y < 470) {
-            velocity.y = 15;
+            velocity.y = Settings.JUMP;
             velocity.scl(0.4f);
         }
     }

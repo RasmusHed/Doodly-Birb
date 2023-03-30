@@ -1,17 +1,14 @@
-package com.mygdx.game;
+package com.mygdx.game.sprites;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Settings;
 
 import java.util.Random;
+import java.util.Set;
 
 public class TubePair {
-    public static final int TUBE_WIDTH = 52;
-    public static final int TUBE_HEIGHT = 320;
-    private static final int GAP_POSITION_FLUCTUATION = 280;
-    private static final int TUBE_GAP = 150;
-    private static final int LOWEST_OPENING = 30;
     private Rectangle topTubeHitBox, bottomTubeHitBox;
     private Texture topTubeTexture, bottomTubeTexture;
     private Vector2 topTubePosition, bottomTubePosition;
@@ -29,15 +26,16 @@ public class TubePair {
     private void setHitBoxPosition() {
         topTubeHitBox = new Rectangle(getTopTubePosition().x,
                 getTopTubePosition().y,
-                TUBE_WIDTH, TUBE_HEIGHT);
+                Settings.TUBE_WIDTH, Settings.TUBE_HEIGHT);
         bottomTubeHitBox = new Rectangle(getBottomTubePosition().x,
                 getBottomTubePosition().y,
-                TUBE_WIDTH, TUBE_HEIGHT);
+                Settings.TUBE_WIDTH, Settings.TUBE_HEIGHT);
     }
 
     private void setTubePairPosition(float x) {
-        topTubePosition = new Vector2(x, rand.nextInt(GAP_POSITION_FLUCTUATION) + TUBE_GAP + LOWEST_OPENING);
-        bottomTubePosition = new Vector2(x, topTubePosition.y - (TUBE_GAP + TUBE_HEIGHT));
+        topTubePosition = new Vector2(x, rand.nextInt(Settings.GAP_POSITION_FLUCTUATION)
+                + Settings.TUBE_GAP + Settings.LOWEST_OPENING);
+        bottomTubePosition = new Vector2(x, topTubePosition.y - (Settings.TUBE_GAP + Settings.TUBE_HEIGHT));
     }
 
     public Texture getTopTubeTexture() {
@@ -55,6 +53,7 @@ public class TubePair {
     public Vector2 getBottomTubePosition() {
         return bottomTubePosition;
     }
+
     public Rectangle getTopTubeHitBox() {
         return topTubeHitBox;
     }
@@ -64,8 +63,8 @@ public class TubePair {
     }
 
     public void reposition(float x) {
-        topTubePosition.set(x, rand.nextInt(GAP_POSITION_FLUCTUATION) + TUBE_GAP + LOWEST_OPENING);
-        bottomTubePosition.set(x, topTubePosition.y - TUBE_GAP - bottomTubeTexture.getHeight());
+        topTubePosition.set(x, rand.nextInt(Settings.GAP_POSITION_FLUCTUATION) + Settings.TUBE_GAP + Settings.LOWEST_OPENING);
+        bottomTubePosition.set(x, topTubePosition.y - Settings.TUBE_GAP - bottomTubeTexture.getHeight());
         topTubeHitBox.x = getTopTubePosition().x;
         topTubeHitBox.y = getTopTubePosition().y;
         bottomTubeHitBox.x = getBottomTubePosition().x;

@@ -1,18 +1,17 @@
-package com.mygdx.game;
+package com.mygdx.game.sprites;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.JumpyBirb;
+import com.mygdx.game.Settings;
 
 public class TubeBatch {
-    public static final int FIRST_TUBE_SPAWN_POSITION = 400;
-    public static final int TUBE_SPACING = 125;
-    private static final int TUBE_COUNT = 5;
     private Array<TubePair> tubes;
 
     public TubeBatch() {
         tubes = new Array<>();
-        for (int i = 1; i <= TUBE_COUNT; i++) {
-            tubes.add(new TubePair(i * (TUBE_SPACING + TubePair.TUBE_WIDTH) + FIRST_TUBE_SPAWN_POSITION));
+        for (int i = 1; i <= Settings.TUBE_COUNT; i++) {
+            tubes.add(new TubePair(i * (Settings.TUBE_SPACING + Settings.TUBE_WIDTH) + Settings.FIRST_TUBE_SPAWN_POSITION));
         }
     }
     public Array<TubePair> getTubes() {
@@ -29,8 +28,8 @@ public class TubeBatch {
 
     public void respawnTubesWhenOutOfScreen(OrthographicCamera camera) {
         for (TubePair tubePair : getTubes()) {
-            if (camera.position.x - (camera.viewportWidth / 2) > tubePair.getTopTubePosition().x + TubePair.TUBE_WIDTH) {
-                tubePair.reposition(tubePair.getTopTubePosition().x + ((TubePair.TUBE_WIDTH + TUBE_SPACING) * TUBE_COUNT));
+            if (camera.position.x - (camera.viewportWidth / 2) > tubePair.getTopTubePosition().x + Settings.TUBE_WIDTH) {
+                tubePair.reposition(tubePair.getTopTubePosition().x + ((Settings.TUBE_WIDTH + Settings.TUBE_SPACING) * Settings.TUBE_COUNT));
             }
         }
     }

@@ -1,49 +1,44 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.Highscore;
+import com.mygdx.game.JumpyBirb;
+import com.mygdx.game.screens.GameScreen;
 
-public class MainMenuScreen implements Screen {
-
+public class Deathscreen implements Screen {
     final JumpyBirb game;
-    final Background background;
-
+    final Highscore score;
     OrthographicCamera camera;
-
-    public MainMenuScreen(final JumpyBirb game) {
+    public Deathscreen(final JumpyBirb game, final Highscore score) {
         this.game = game;
-
-        background = new Background(0, 0);
+        this.score = score;
 
         camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
-
+        camera.setToOrtho(false,800,480);
     }
-
 
     @Override
     public void show() {
-
     }
 
     @Override
     public void render(float delta) {
+        ScreenUtils.clear(0, 0, 0.2f, 1);
+
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-
-        game.batch.draw(background.getBackgroundImage(), background.getBackgroundPosition().x, background.getBackgroundPosition().y);
-        game.titleFont.draw(game.batch, "JUMPY BIRB", 100, 390);
-        game.mainFont.draw(game.batch, "Options", 270, 270);
-        game.mainFont.draw(game.batch, "Quit", 270, 190);
-        game.accentFont.draw(game.batch, "Tap anywhere to begin!", 100, 70);
+        game.mainFont.draw(game.batch,"You Lost!", 100, 400);
+        game.mainFont.draw(game.batch, "Press space to play again", 100,230);
+        game.titleFont.draw(game.batch, "Your score: " + score.getScore(), 100, 110);
         game.batch.end();
 
-        if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+        if(Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             game.setScreen(new GameScreen(game));
             dispose();
         }

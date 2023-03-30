@@ -34,8 +34,8 @@ public class Highscore {
 
     private int convertScore(float score) {
         int newScore = 0;
-        newScore = (int)((score - (TubeBatch.FIRST_TUBE_SPAWN_POSITION + (TubePair.TUBE_WIDTH/2)))
-                / (TubeBatch.TUBE_SPACING + TubePair.TUBE_WIDTH));
+        newScore = (int)((score - (Settings.FIRST_TUBE_SPAWN_POSITION + (Settings.TUBE_WIDTH/2)))
+                / (Settings.TUBE_SPACING + Settings.TUBE_WIDTH));
         if (newScore < 0) { newScore = 0; }
         return newScore;
     }
