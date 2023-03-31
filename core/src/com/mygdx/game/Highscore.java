@@ -54,23 +54,35 @@ public class Highscore {
         return newScore;
     }
 
-//    public static void writeHighscore(int score) {
-//        FileHandle file = Gdx.files.internal("highscores.txt");
-//            file.add(score);
-//            Collections.sort(file);
-//            while (file.size() > 5) {
-//                file.remove(file.size() - 1);
-//            }
-//            for (Integer highscore: file) {
-//                file.writeString(String.valueOf(highscore), false);
-//            }
-//
-//    }
+    public static void writeHighscore(int score){
+        List<String> highscores = addHighscore(score);
+        FileHandle file = Gdx.files.local("highscores.txt");
+        StringBuilder sb = new StringBuilder();
+        for (String highscore : highscores){
+            sb.append(highscore + "\n");
+        }
+        String highscoreString = sb.toString();
+        file.writeString(highscoreString, false);
+    }
+
+    private static List<String> addHighscore(int score) {
+        List<String> highscores = new ArrayList<>();
+        for (String highscore : getHighscores()){
+            highscores.add(highscore);
+        }
+        highscores.add(String.valueOf(score));
+        Collections.sort(highscores);
+        Collections.reverse(highscores);
+        while (highscores.size() > 5){
+            highscores.remove(highscores.size()-1);
+        }
+        return highscores;
+    }
 
     public static String[] getHighscores() {
-        FileHandle file = Gdx.files.internal("highscores.txt");
+        FileHandle file = Gdx.files.local("highscores.txt");
         String filetext = file.readString();
-        String[] highscores = filetext.split(" ");
+        String[] highscores = filetext.split("\n");
 
 
         return highscores;
