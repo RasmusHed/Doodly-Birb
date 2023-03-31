@@ -113,7 +113,6 @@ public class GameScreen implements Screen {
                 Highscore.writeHighscore(score.getScore());
                 Highscore.printHS();
                 game.setScreen(new Deathscreen(game, score));
-
             }
         }
     }
