@@ -13,6 +13,7 @@ public class GameScreen implements Screen {
     final Deathscreen death;
     final TubeBatch tubes;
     final Highscore score;
+    String highscore;
     final Birb birb;
     final OrthographicCamera camera;
     final Background background;
@@ -109,6 +110,8 @@ public class GameScreen implements Screen {
     private void checkBirbHitTubes() {
         for (TubePair tubePair : tubes.getTubes()) {
             if (birb.getBirbHitBox().overlaps(tubePair.getBottomTubeHitBox()) || birb.getBirbHitBox().overlaps(tubePair.getTopTubeHitBox())) {
+                Highscore.writeHighscore(score.getScore());
+                Highscore.printHS();
                 game.setScreen(new Deathscreen(game, score));
 
             }

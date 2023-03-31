@@ -12,13 +12,12 @@ import com.mygdx.game.screens.GameScreen;
 public class Deathscreen implements Screen {
     final JumpyBirb game;
     final Highscore score;
-    final String highscore;
+    String highscore;
     OrthographicCamera camera;
     public Deathscreen(final JumpyBirb game, final Highscore score) {
         this.game = game;
         this.score = score;
-        Highscore.writeHighscore(score.getScore());
-        Highscore.printHS();
+
         String[] highscoreArray = Highscore.getHighscores();
         highscore = highscoreArray[0];
 

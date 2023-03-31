@@ -4,15 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class Highscore {
@@ -54,11 +47,18 @@ public class Highscore {
         return newScore;
     }
 
-    public static void writeHighscore(int score){
+    public static void createHighscoreFile() {
+        if (!Gdx.files.local("highscores.txt").exists()) {
+        FileHandle file = Gdx.files.local("highscores.txt");
+        file.writeString("", false);
+        }
+    }
+
+    public static void writeHighscore(int score) {
         FileHandle file = Gdx.files.local("highscores.txt");
         List<Integer> highscores = addHighscore(score);
         StringBuilder sb = new StringBuilder();
-        for (Integer highscore : highscores){
+        for (Integer highscore : highscores) {
             sb.append(highscore + "\n");
         }
         String highscoreString = sb.toString();
@@ -67,14 +67,18 @@ public class Highscore {
 
     private static List<Integer> addHighscore(int score) {
         List<Integer> highscores = new ArrayList<>();
-        for (String highscore : getHighscores()){
-            highscores.add(Integer.parseInt(highscore));
+        for (String highscore : getHighscores()) {
+            try {
+                highscores.add(Integer.valueOf(highscore));
+            } catch (NumberFormatException e) {
+                e.getMessage();
+            }
         }
         highscores.add(score);
         Collections.sort(highscores);
         Collections.reverse(highscores);
-        while (highscores.size() > 5){
-            highscores.remove(highscores.size()-1);
+        while (highscores.size() > 5) {
+            highscores.remove(highscores.size() - 1);
         }
         return highscores;
     }
@@ -89,7 +93,7 @@ public class Highscore {
         return highscores;
     }
 
-    public static void printHS(){
+    public static void printHS() {
         String[] highscores = getHighscores();
         for (int i = 0; i < highscores.length; i++) {
             System.out.println(highscores[i]);
