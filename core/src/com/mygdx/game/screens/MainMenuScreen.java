@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.mygdx.game.Highscore;
 import com.mygdx.game.sprites.Background;
 import com.mygdx.game.JumpyBirb;
 import com.mygdx.game.Settings;

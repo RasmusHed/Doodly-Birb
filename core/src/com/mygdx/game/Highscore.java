@@ -55,22 +55,22 @@ public class Highscore {
     }
 
     public static void writeHighscore(int score){
-        List<String> highscores = addHighscore(score);
         FileHandle file = Gdx.files.local("highscores.txt");
+        List<Integer> highscores = addHighscore(score);
         StringBuilder sb = new StringBuilder();
-        for (String highscore : highscores){
+        for (Integer highscore : highscores){
             sb.append(highscore + "\n");
         }
         String highscoreString = sb.toString();
         file.writeString(highscoreString, false);
     }
 
-    private static List<String> addHighscore(int score) {
-        List<String> highscores = new ArrayList<>();
+    private static List<Integer> addHighscore(int score) {
+        List<Integer> highscores = new ArrayList<>();
         for (String highscore : getHighscores()){
-            highscores.add(highscore);
+            highscores.add(Integer.parseInt(highscore));
         }
-        highscores.add(String.valueOf(score));
+        highscores.add(score);
         Collections.sort(highscores);
         Collections.reverse(highscores);
         while (highscores.size() > 5){
@@ -80,6 +80,7 @@ public class Highscore {
     }
 
     public static String[] getHighscores() {
+
         FileHandle file = Gdx.files.local("highscores.txt");
         String filetext = file.readString();
         String[] highscores = filetext.split("\n");
