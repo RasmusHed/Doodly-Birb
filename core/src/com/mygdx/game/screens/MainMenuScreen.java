@@ -26,7 +26,7 @@ public class MainMenuScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Settings.SCREEN_WIDTH, Settings.SCREEN_HEIGHT);
-
+        Highscore.createHighscoreFile();
     }
 
 
