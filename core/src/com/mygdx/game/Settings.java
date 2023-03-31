@@ -29,12 +29,12 @@ public class Settings {
             GAP_POSITION_FLUCTUATION = 230;
         }
         if (difficulty.equals("MEDIUM")){
-            DELTATIME = 90;
+            DELTATIME = 120;
             TUBE_GAP =175;
             GAP_POSITION_FLUCTUATION = 250;
         }
         if (difficulty.equals("HARD")){
-            DELTATIME = 120;
+            DELTATIME = 180;
             TUBE_GAP = 150;
             GAP_POSITION_FLUCTUATION = 270;
         }
