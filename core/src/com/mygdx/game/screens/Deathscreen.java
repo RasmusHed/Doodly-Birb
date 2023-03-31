@@ -16,6 +16,8 @@ public class Deathscreen implements Screen {
     public Deathscreen(final JumpyBirb game, final Highscore score) {
         this.game = game;
         this.score = score;
+        Highscore.writeHighscore(score.getScore());
+        Highscore.printHS();
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false,800,480);
