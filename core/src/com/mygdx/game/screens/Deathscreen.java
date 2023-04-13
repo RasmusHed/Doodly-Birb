@@ -5,28 +5,27 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.Highscore;
+import com.mygdx.game.HighscoreList;
+import com.mygdx.game.Score;
 import com.mygdx.game.JumpyBirb;
 import com.mygdx.game.MyInputProcessor;
-import com.mygdx.game.screens.GameScreen;
 
 public class Deathscreen implements Screen {
-    final JumpyBirb game;
-    final Highscore score;
-    String highscore;
     private static final int RETURN_X = 100;
     private static final int RETURN_Y = 150;
+    final JumpyBirb game;
+    final Score score;
+    String highscore;
     OrthographicCamera camera;
-    private boolean input;
     private float elapsedTime = 0;
     private MyInputProcessor inputProcessor;
-    private String name = "";
 
-    public Deathscreen(final JumpyBirb game, final Highscore score) {
+
+    public Deathscreen(final JumpyBirb game, final Score score) {
         this.game = game;
         this.score = score;
 
-        String[] highscoreArray = Highscore.getHighscores();
+        String[] highscoreArray = HighscoreList.getHighscores();
         highscore = highscoreArray[0];
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
@@ -47,17 +46,12 @@ public class Deathscreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.titleFont.draw(game.batch, "Highscore: " + name, 100, 400);
+        game.titleFont.draw(game.batch, "Highscore: " + inputProcessor.getName(), 100, 400);
         game.mainFont.draw(game.batch, "Your score: " + score.getScore(), 100, 300);
         game.mainFont.draw(game.batch, "Press space to play again", 100, 240);
         game.mainFont.draw(game.batch, "Return to main screen", RETURN_X, RETURN_Y);
-        if (!input && elapsedTime > 0.1 && Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
-            String lastKey = inputProcessor.getLastKeyPressed();
-            name += lastKey;
-            if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-                input = true;
-            }
-        }
+        inputProcessor.writePlayerName(score);
+
         game.batch.end();
 
         if (Gdx.input.justTouched() && Gdx.input.getX() >= RETURN_X && Gdx.input.getX() <= RETURN_X + 620 && Gdx.input.getY() >= RETURN_Y + 190 && Gdx.input.getY() <= RETURN_Y + 240) {

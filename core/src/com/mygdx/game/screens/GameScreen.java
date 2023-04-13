@@ -12,8 +12,7 @@ public class GameScreen implements Screen {
     final JumpyBirb game;
     final Deathscreen death;
     final TubeBatch tubes;
-    final Highscore score;
-    String highscore;
+    final Score score;
     final Birb birb;
     final OrthographicCamera camera;
     final Background background;
@@ -28,7 +27,7 @@ public class GameScreen implements Screen {
         birb = new Birb(150, Settings.SCREEN_HEIGHT/2);
 
         // Start the highscore counter
-        score = new Highscore(Settings.SCREEN_WIDTH/2, Settings.SCREEN_HEIGHT - 80);
+        score = new Score(Settings.SCREEN_WIDTH/2, Settings.SCREEN_HEIGHT - 80);
 
         // Generates five tubes and adds 400px to the start x position
         tubes = new TubeBatch();
@@ -110,8 +109,6 @@ public class GameScreen implements Screen {
     private void checkBirbHitTubes() {
         for (TubePair tubePair : tubes.getTubes()) {
             if (birb.getBirbHitBox().overlaps(tubePair.getBottomTubeHitBox()) || birb.getBirbHitBox().overlaps(tubePair.getTopTubeHitBox())) {
-                Highscore.writeHighscore(score.getScore());
-                Highscore.printHS();
                 game.setScreen(new Deathscreen(game, score));
             }
         }

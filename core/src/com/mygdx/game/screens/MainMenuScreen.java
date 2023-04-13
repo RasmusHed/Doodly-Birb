@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.mygdx.game.Highscore;
+import com.mygdx.game.HighscoreList;
 import com.mygdx.game.TopFiveScores;
 import com.mygdx.game.sprites.Background;
 import com.mygdx.game.JumpyBirb;
@@ -29,7 +29,7 @@ public class MainMenuScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Settings.SCREEN_WIDTH, Settings.SCREEN_HEIGHT);
-        Highscore.createHighscoreFile();
+        HighscoreList.createHighscoreFile();
     }
 
 
