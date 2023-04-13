@@ -1,10 +1,12 @@
 package com.mygdx.game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
 public class MyInputProcessor implements InputProcessor {
+
     private String lastKeyPressed;
-    private String name;
+    private String name = "";
 
     public MyInputProcessor() {
         lastKeyPressed = "";
@@ -16,9 +18,6 @@ public class MyInputProcessor implements InputProcessor {
 
     public String getName() {
         return name;
-    }
-    public void setName() {
-        name += lastKeyPressed;
     }
 
     @Override
@@ -60,5 +59,22 @@ public class MyInputProcessor implements InputProcessor {
     @Override
     public boolean scrolled(float amountX, float amountY) {
         return false;
+    }
+
+    public void writePlayerName(Score score) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
+            String lastKey = getLastKeyPressed();
+            if (name.length() < 3) {
+                name += lastKey;
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                score.setPlayerName(name);
+                HighscoreList.writeHighscore(score);
+                System.out.println(score.toString());
+            }
+            if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
+                name = "";
+            }
+        }
     }
 }

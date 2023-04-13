@@ -39,7 +39,7 @@ public class TopFiveScores implements Screen {
         game.titleFont.draw(game.batch, "Highscore:", 30, 460);
         game.mainFont.draw(game.batch, "Tap anywhere to return!", 30, 100);
         int pos = 440;
-        for (String scores : Highscore.getHighscores()) {
+        for (String scores : HighscoreList.getHighscores()) {
             game.mainFont.draw(game.batch, scores,440, pos);
             pos -= 70;
         }
