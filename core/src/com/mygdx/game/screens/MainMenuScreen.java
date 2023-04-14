@@ -29,7 +29,9 @@ public class MainMenuScreen implements Screen {
 
         camera = new OrthographicCamera();
         camera.setToOrtho(false, Settings.SCREEN_WIDTH, Settings.SCREEN_HEIGHT);
-        HighscoreList.createHighscoreFile();
+        if (!Gdx.files.local("highscores.txt").exists() || HighscoreList.isHighscoreBadFormat()) {
+            HighscoreList.createHighscoreFile();
+        }
     }
 
 
@@ -93,8 +95,7 @@ public class MainMenuScreen implements Screen {
         // Quit button
         else if (Gdx.input.justTouched() && Gdx.input.getX() >= QUIT_X && Gdx.input.getX() <= QUIT_X + 120 && Gdx.input.getY() >= QUIT_Y + 190 && Gdx.input.getY() <= QUIT_Y + 240) {
             Gdx.app.exit();
-        }
-        else if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+        } else if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             game.setScreen(new GameScreen(game));
         }
     }

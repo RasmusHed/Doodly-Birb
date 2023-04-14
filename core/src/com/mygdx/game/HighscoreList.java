@@ -10,6 +10,23 @@ import java.util.List;
 public class HighscoreList {
     private List<Score> highscoreList;
 
+    public static boolean isHighscoreBadFormat() {
+        boolean badFormat = false;
+        for (String parsedHighscore : getHighscores()) {
+            String[] nameAndScore = parsedHighscore.split(": ");
+            if (nameAndScore[0].length() != 3){
+                badFormat = true;
+            }
+            try {
+                Integer.parseInt(nameAndScore[1]);
+            } catch (NumberFormatException e){
+                System.out.println("Highscore is not a number!");
+                badFormat = true;
+            }
+        }
+        return badFormat;
+    }
+
     public List<Score> getHighscoreList() {
         return highscoreList;
     }
@@ -35,10 +52,8 @@ public class HighscoreList {
     }
 
     public static void createHighscoreFile() {
-        if (!Gdx.files.local("highscores.txt").exists()) {
-            FileHandle file = Gdx.files.local("highscores.txt");
-            file.writeString("", false);
-        }
+        FileHandle file = Gdx.files.local("highscores.txt");
+        file.writeString("---: 0", false);
     }
 
     public static void writeHighscore(Score score) {
