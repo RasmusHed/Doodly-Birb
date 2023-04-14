@@ -2,7 +2,7 @@ package com.mygdx.game;
 
 public class Settings {
     //DELTA
-    public static int DELTATIME = 60;
+    public static int DELTATIME = 120;
     //SCREEN
     public static final int SCREEN_WIDTH = 800;
     public static final int SCREEN_HEIGHT = 480;
@@ -13,8 +13,8 @@ public class Settings {
     public static final int TUBE_COUNT = 5;
     public static final int TUBE_WIDTH = 52;
     public static final int TUBE_HEIGHT = 320;
-    public static int GAP_POSITION_FLUCTUATION = 230;
-    public static int TUBE_GAP = 200;
+    public static int GAP_POSITION_FLUCTUATION = 250;
+    public static int TUBE_GAP = 175;
     public static final int LOWEST_OPENING = 30;
     //BIRB
     public static final float GRAVITY = -0.234f;

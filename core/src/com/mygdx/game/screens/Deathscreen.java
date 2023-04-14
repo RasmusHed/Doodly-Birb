@@ -26,7 +26,7 @@ public class Deathscreen implements Screen {
         this.score = score;
 
         String[] highscoreArray = HighscoreList.getHighscores();
-        highscore = highscoreArray[0];
+        highscore = highscoreArray[0].split(": ")[1];
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 800, 480);
         inputProcessor = new MyInputProcessor();
@@ -46,19 +46,27 @@ public class Deathscreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.titleFont.draw(game.batch, "Highscore: " + inputProcessor.getName(), 100, 400);
-        game.mainFont.draw(game.batch, "Your score: " + score.getScore(), 100, 300);
+        game.titleFont.draw(game.batch, "Highscore: " + highscore, 100, 400);
+        if (HighscoreList.isScoreOnHighscoreList(score)) {
+            game.mainFont.draw(game.batch, "YOU HAVE A HIGHSCORE!!!!", 100, 300);
+            game.mainFont.draw(game.batch, "Enter your name: " + inputProcessor.getName(), 100, 240);
+        } else {
+            game.mainFont.draw(game.batch, "Your score: " + score.getScore(), 100, 300);
         game.mainFont.draw(game.batch, "Press space to play again", 100, 240);
+        }
         game.mainFont.draw(game.batch, "Return to main screen", RETURN_X, RETURN_Y);
         inputProcessor.writePlayerName(score);
 
         game.batch.end();
 
-        if (Gdx.input.justTouched() && Gdx.input.getX() >= RETURN_X && Gdx.input.getX() <= RETURN_X + 620 && Gdx.input.getY() >= RETURN_Y + 190 && Gdx.input.getY() <= RETURN_Y + 240) {
-            game.setScreen(new MainMenuScreen(game));
-        } else if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            game.setScreen(new GameScreen(game));
-            dispose();
+
+        if (elapsedTime > 0.5){
+            if (Gdx.input.justTouched() && Gdx.input.getX() >= RETURN_X && Gdx.input.getX() <= RETURN_X + 620 && Gdx.input.getY() >= RETURN_Y + 190 && Gdx.input.getY() <= RETURN_Y + 240) {
+                game.setScreen(new MainMenuScreen(game));
+            } else if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                game.setScreen(new GameScreen(game));
+                dispose();
+            }
         }
     }
 

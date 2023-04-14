@@ -14,25 +14,20 @@ public class HighscoreList {
         boolean badFormat = false;
         for (String parsedHighscore : getHighscores()) {
             String[] nameAndScore = parsedHighscore.split(": ");
-            if (nameAndScore[0].length() != 3){
+            if (nameAndScore[0].length() != 3) {
                 badFormat = true;
             }
             try {
                 Integer.parseInt(nameAndScore[1]);
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.out.println("Highscore is not a number!");
+                badFormat = true;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Highscores must be a name and a score");
                 badFormat = true;
             }
         }
         return badFormat;
-    }
-
-    public List<Score> getHighscoreList() {
-        return highscoreList;
-    }
-
-    public HighscoreList(List<Score> highscoreList) {
-        this.highscoreList = highscoreList;
     }
 
     private static List<Score> addHighscore(Score score) {
@@ -51,9 +46,24 @@ public class HighscoreList {
         return highscores;
     }
 
+    public static boolean isScoreOnHighscoreList(Score score) {
+        boolean isScoreOnList = false;
+        for (String parsedHighscore : getHighscores()) {
+            String[] nameAndScore = parsedHighscore.split(": ");
+            int highscore = Integer.parseInt(nameAndScore[1]);
+            if (score.getScore() > highscore) {
+                isScoreOnList = true;
+            }
+        }
+        return isScoreOnList;
+    }
+
     public static void createHighscoreFile() {
         FileHandle file = Gdx.files.local("highscores.txt");
         file.writeString("---: 0", false);
+        for (int i = 0; i < 4; i++) {
+            file.writeString("\n---: 0", true);
+        }
     }
 
     public static void writeHighscore(Score score) {

@@ -64,11 +64,19 @@ public class MyInputProcessor implements InputProcessor {
     public void writePlayerName(Score score) {
         if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
             String lastKey = getLastKeyPressed();
-            if (name.length() < 3) {
+            if (name.length() < 3 && lastKey.length() == 1) {
                 name += lastKey;
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                score.setPlayerName(name);
+                if (name.length() == 3) {
+                    score.setPlayerName(name);
+                } else if (name.length() == 2){
+                    score.setPlayerName(name + "-");
+                } else if (name.length() == 1){
+                    score.setPlayerName(name + "--");
+                } else if (name.length() == 0){
+                    score.setPlayerName("---");
+                }
                 HighscoreList.writeHighscore(score);
                 System.out.println(score.toString());
             }
