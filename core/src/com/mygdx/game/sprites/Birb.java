@@ -28,7 +28,7 @@ public class Birb {
     public Birb(int x, int y) {
         posistion = new Vector3(x, y, 0);
         velocity = new Vector3(10, 0, 0);
-        birb = new Texture("birbIcon.png");
+        birb = new Texture("birb.png");
         jumpSound= Gdx.audio.newSound(Gdx.files.internal("sound.wav"));
         jumpSound1= Gdx.audio.newSound(Gdx.files.internal("sound(1).wav"));
         jumpSound2= Gdx.audio.newSound(Gdx.files.internal("sound(2).wav"));

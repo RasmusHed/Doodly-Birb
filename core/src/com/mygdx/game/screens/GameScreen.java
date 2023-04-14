@@ -1,6 +1,8 @@
 package com.mygdx.game.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mygdx.game.*;
 import com.mygdx.game.sprites.Background;
@@ -16,6 +18,7 @@ public class GameScreen implements Screen {
     final Birb birb;
     final OrthographicCamera camera;
     final Background background;
+    private Sound deathSound;
 
     public GameScreen(JumpyBirb game) {
         this.game = game;
@@ -35,6 +38,7 @@ public class GameScreen implements Screen {
         // Create the background
         background = new Background(0, 0);
 
+        deathSound = Gdx.audio.newSound(Gdx.files.internal("deathsound.wav"));
         death = new Deathscreen(game, score);
     }
 
@@ -109,6 +113,7 @@ public class GameScreen implements Screen {
     private void checkBirbHitTubes() {
         for (TubePair tubePair : tubes.getTubes()) {
             if (birb.getBirbHitBox().overlaps(tubePair.getBottomTubeHitBox()) || birb.getBirbHitBox().overlaps(tubePair.getTopTubeHitBox())) {
+                deathSound.play();
                 game.setScreen(new Deathscreen(game, score));
             }
         }
