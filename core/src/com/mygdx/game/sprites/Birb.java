@@ -17,23 +17,19 @@ public class Birb {
     private Texture birb;
     private Vector3 posistion;
     private Vector3 velocity;
-    private Sound jumpSound;
-    private Sound jumpSound1;
-    private Sound jumpSound2;
-    private Sound jumpSound3;
-    private Sound jumpSound4;
+    private Sound jumpSound, jumpSound1, jumpSound2, jumpSound3, jumpSound4;
     private Random random;
 
 
     public Birb(int x, int y) {
         posistion = new Vector3(x, y, 0);
         velocity = new Vector3(10, 0, 0);
-        birb = new Texture("birb.png");
-        jumpSound= Gdx.audio.newSound(Gdx.files.internal("sound.wav"));
-        jumpSound1= Gdx.audio.newSound(Gdx.files.internal("sound(1).wav"));
-        jumpSound2= Gdx.audio.newSound(Gdx.files.internal("sound(2).wav"));
-        jumpSound3= Gdx.audio.newSound(Gdx.files.internal("sound(3).wav"));
-        jumpSound4= Gdx.audio.newSound(Gdx.files.internal("sound(4).wav"));
+        birb = new Texture("birb/birb.png");
+        jumpSound= Gdx.audio.newSound(Gdx.files.internal("birb/sound.wav"));
+        jumpSound1= Gdx.audio.newSound(Gdx.files.internal("birb/sound(1).wav"));
+        jumpSound2= Gdx.audio.newSound(Gdx.files.internal("birb/sound(2).wav"));
+        jumpSound3= Gdx.audio.newSound(Gdx.files.internal("birb/sound(3).wav"));
+        jumpSound4= Gdx.audio.newSound(Gdx.files.internal("birb/sound(4).wav"));
 
         setHitBox();
     }
@@ -78,7 +74,7 @@ public class Birb {
 
     public void jump() {
         random = new Random();
-        int randomSound = random.nextInt(4);
+        int randomSound = random.nextInt(5);
         if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && getPosistion().y < 470) {
             if (randomSound == 0){
                 jumpSound.play();
@@ -88,7 +84,7 @@ public class Birb {
                 jumpSound2.play();
             } else if (randomSound == 3) {
                 jumpSound3.play();
-            } else if (randomSound == 4) {
+            } else {
                 jumpSound4.play();
             }
             velocity.y = Settings.JUMP;
