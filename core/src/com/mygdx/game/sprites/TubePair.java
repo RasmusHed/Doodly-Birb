@@ -7,6 +7,7 @@ import com.mygdx.game.Settings;
 
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class TubePair {
     private Rectangle topTubeHitBox, bottomTubeHitBox;
@@ -15,8 +16,18 @@ public class TubePair {
     private Random rand;
 
     public TubePair(float x) {
-        topTubeTexture = new Texture("topdiscopipev1.png");
-        bottomTubeTexture = new Texture("bottomdiscopipev1.png");
+        int randTop = ThreadLocalRandom.current().nextInt(6);
+        int randBottom = ThreadLocalRandom.current().nextInt(6);
+        if (randTop > 3){
+            topTubeTexture = new Texture("top1.png");   
+        } else {
+            topTubeTexture = new Texture("top2.png");
+        }
+        if (randBottom > 3){
+            bottomTubeTexture = new Texture("bottom4.png");   
+        } else {
+            bottomTubeTexture = new Texture("bottom5.png");
+        }
         rand = new Random();
 
         setTubePairPosition(x);
