@@ -38,7 +38,7 @@ public class GameScreen implements Screen {
         // Create the background
         background = new Background(0, 0);
 
-        deathSound = Gdx.audio.newSound(Gdx.files.internal("deathsound.wav"));
+        deathSound = Gdx.audio.newSound(Gdx.files.internal("birb/deathsound.wav"));
         death = new Deathscreen(game, score);
     }
 
