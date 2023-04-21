@@ -40,4 +40,8 @@ public class Settings {
         }
     }
 
+    public static int getDELTATIME(){
+        return DELTATIME;
+    }
+
 }

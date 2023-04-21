@@ -14,50 +14,49 @@ public class TubePair {
     private Texture topTubeTexture, topTubeTexture2, bottomTubeTexture, bottomTubeTexture2;
     private Vector2 topTubePosition, bottomTubePosition;
     private Random rand;
-    private static int count;
 
     public TubePair(float x) {
         int randTop = ThreadLocalRandom.current().nextInt(5);
         int randBottom = ThreadLocalRandom.current().nextInt(5);
-        if (randTop == 0){
+        if (randTop == 0) {
             topTubeTexture = new Texture("tubes/top1_1.png");
             topTubeTexture2 = new Texture("tubes/top1_2.png");
-        } else if (randTop == 1){
+        } else if (randTop == 1) {
             topTubeTexture = new Texture("tubes/top2_1.png");
             topTubeTexture2 = new Texture("tubes/top2_2.png");
-        } else if (randTop == 2){
+        } else if (randTop == 2) {
             topTubeTexture = new Texture("tubes/top3_1.png");
             topTubeTexture2 = new Texture("tubes/top3_2.png");
-        } else if (randTop == 3){
+        } else if (randTop == 3) {
             topTubeTexture = new Texture("tubes/top4_1.png");
             topTubeTexture2 = new Texture("tubes/top4_2.png");
-        } else if (randTop == 4){
+        } else if (randTop == 4) {
             topTubeTexture = new Texture("tubes/top5_1.png");
             topTubeTexture2 = new Texture("tubes/top5_2.png");
-        } else if (randTop == 5){
+        } else if (randTop == 5) {
             topTubeTexture = new Texture("tubes/top6_1.png");
             topTubeTexture2 = new Texture("tubes/top6_2.png");
         }
-        if (randBottom == 0){
+        if (randBottom == 0) {
             bottomTubeTexture = new Texture("tubes/bottom1_1.png");
             bottomTubeTexture2 = new Texture("tubes/bottom1_2.png");
-        } else if (randBottom == 1){
+        } else if (randBottom == 1) {
             bottomTubeTexture = new Texture("tubes/bottom2_1.png");
             bottomTubeTexture2 = new Texture("tubes/bottom2_2.png");
-        } else if (randBottom == 2){
+        } else if (randBottom == 2) {
             bottomTubeTexture = new Texture("tubes/bottom3_1.png");
             bottomTubeTexture2 = new Texture("tubes/bottom3_2.png");
-        } else if (randBottom == 3){
+        } else if (randBottom == 3) {
             bottomTubeTexture = new Texture("tubes/bottom4_1.png");
             bottomTubeTexture2 = new Texture("tubes/bottom4_2.png");
-        } else if (randBottom == 4){
+        } else if (randBottom == 4) {
             bottomTubeTexture = new Texture("tubes/bottom5_1.png");
             bottomTubeTexture2 = new Texture("tubes/bottom5_2.png");
         } else if (randBottom == 5) {
             bottomTubeTexture = new Texture("tubes/bottom6_1.png");
             bottomTubeTexture2 = new Texture("tubes/bottom6_2.png");
         }
-            rand = new Random();
+        rand = new Random();
 
         setTubePairPosition(x);
         setHitBoxPosition();
@@ -66,10 +65,10 @@ public class TubePair {
     private void setHitBoxPosition() {
         topTubeHitBox = new Rectangle(getTopTubePosition().x,
                 getTopTubePosition().y,
-                Settings.TUBE_WIDTH - 50, Settings.TUBE_HEIGHT - 20);
+                Settings.TUBE_WIDTH - 50, Settings.TUBE_HEIGHT - 30);
         bottomTubeHitBox = new Rectangle(getBottomTubePosition().x,
                 getBottomTubePosition().y,
-                Settings.TUBE_WIDTH - 50, Settings.TUBE_HEIGHT - 20);
+                Settings.TUBE_WIDTH - 50, Settings.TUBE_HEIGHT - 30);
     }
 
     private void setTubePairPosition(float x) {
@@ -78,37 +77,19 @@ public class TubePair {
         bottomTubePosition = new Vector2(x, topTubePosition.y - (Settings.TUBE_GAP + Settings.TUBE_HEIGHT));
     }
 
-    public Texture getTopTubeTexture() {
-        count++;
-        boolean isItTimeToShowTexture2 = false;
-        if (count % 10 == 0) {
-            if (isItTimeToShowTexture2) {
-                isItTimeToShowTexture2 = false;
-            } else {
-                isItTimeToShowTexture2 = true;
-            }
-        }
-        if (isItTimeToShowTexture2) {
-            return topTubeTexture2;
-        } else {
+    public Texture getTopTubeTexture(int tubeFrame) {
+        if (tubeFrame == 0) {
             return topTubeTexture;
+        } else {
+            return topTubeTexture2;
         }
     }
 
-    public Texture getBottomTubeTexture() {
-        count++;
-        boolean isItTimeToShowTexture2 = false;
-        if (count % 10 == 0) {
-            if (isItTimeToShowTexture2) {
-                isItTimeToShowTexture2 = false;
-            } else {
-                isItTimeToShowTexture2 = true;
-            }
-        }
-        if (isItTimeToShowTexture2) {
-            return bottomTubeTexture2;
-        } else {
+    public Texture getBottomTubeTexture(int tubeFrame) {
+        if (tubeFrame == 0) {
             return bottomTubeTexture;
+        } else {
+            return bottomTubeTexture2;
         }
     }
 

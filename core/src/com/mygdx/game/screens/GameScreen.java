@@ -6,10 +6,11 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.*;
-import com.mygdx.game.sprites.Background;
 import com.mygdx.game.sprites.Birb;
 import com.mygdx.game.sprites.TubeBatch;
 import com.mygdx.game.sprites.TubePair;
+
+import java.util.Set;
 
 public class GameScreen implements Screen {
     final JumpyBirb game;
@@ -20,6 +21,8 @@ public class GameScreen implements Screen {
     final OrthographicCamera camera;
     //final Background background;
     private Sound deathSound;
+    private float elapsedTime = 0;
+    private int tubeFrame;
 
     public GameScreen(JumpyBirb game) {
         this.game = game;
@@ -58,6 +61,22 @@ public class GameScreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
         game.batch.begin();
 
+        if (Settings.getDELTATIME() == 180) {
+            elapsedTime += delta;
+        } else if (Settings.getDELTATIME() == 120) {
+            elapsedTime += delta * 1.5;
+        } else {
+            elapsedTime += delta * 2;
+        }
+        if (elapsedTime >= 2){
+            elapsedTime = 0;
+        }
+        tubeFrame = Math.round(elapsedTime);
+        if (tubeFrame >= 2){
+            tubeFrame = 0;
+        }
+        System.out.println(tubeFrame);
+
         birb.gravity();
         birb.jump();
         birb.cantGoBelowScreen();
@@ -70,7 +89,7 @@ public class GameScreen implements Screen {
         ScreenUtils.clear(0.9f, 0.9f, 0.9f, 0.7f);
 
         //draw the tubes
-        tubes.spawnTubes(game);
+        tubes.spawnTubes(game, tubeFrame);
         tubes.respawnTubesWhenOutOfScreen(camera);
 
         //write score to gamescreen
