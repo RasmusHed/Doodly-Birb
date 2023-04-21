@@ -19,10 +19,10 @@ public class TubeBatch {
     }
 
 
-    public void spawnTubes(JumpyBirb game) {
+    public void spawnTubes(JumpyBirb game, int tubeFrame) {
         for (TubePair tubePair : getTubes()) {
-            game.batch.draw(tubePair.getTopTubeTexture(), tubePair.getTopTubePosition().x, tubePair.getTopTubePosition().y);
-            game.batch.draw(tubePair.getBottomTubeTexture(), tubePair.getBottomTubePosition().x, tubePair.getBottomTubePosition().y);
+            game.batch.draw(tubePair.getTopTubeTexture(tubeFrame), tubePair.getTopTubePosition().x, tubePair.getTopTubePosition().y);
+            game.batch.draw(tubePair.getBottomTubeTexture(tubeFrame), tubePair.getBottomTubePosition().x, tubePair.getBottomTubePosition().y);
         }
     }
 
