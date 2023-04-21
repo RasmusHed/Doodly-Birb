@@ -6,6 +6,9 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
+import com.mygdx.game.JumpyBirb;
+import com.mygdx.game.Score;
+import com.mygdx.game.screens.DeathScreen;
 import com.mygdx.game.utils.Settings;
 
 import java.util.Random;
@@ -14,22 +17,23 @@ import java.util.Random;
 public class Birb {
 
     private Rectangle birbHitBox;
-    private Texture birb;
+    private final Texture birb;
     private Vector3 posistion;
     private Vector3 velocity;
-    private Sound jumpSound, jumpSound1, jumpSound2, jumpSound3, jumpSound4;
+    private final Sound jumpSound, jumpSound1, jumpSound2, jumpSound3, jumpSound4;
     private Random random;
-
+    private final Sound deathSound;
 
     public Birb(int x, int y) {
         posistion = new Vector3(x, y, 0);
         velocity = new Vector3(10, 0, 0);
         birb = new Texture("birb/birb.png");
-        jumpSound= Gdx.audio.newSound(Gdx.files.internal("birb/sound.wav"));
-        jumpSound1= Gdx.audio.newSound(Gdx.files.internal("birb/sound(1).wav"));
-        jumpSound2= Gdx.audio.newSound(Gdx.files.internal("birb/sound(2).wav"));
-        jumpSound3= Gdx.audio.newSound(Gdx.files.internal("birb/sound(3).wav"));
-        jumpSound4= Gdx.audio.newSound(Gdx.files.internal("birb/sound(4).wav"));
+        deathSound = Gdx.audio.newSound(Gdx.files.internal("birb/deathsound.wav"));
+        jumpSound = Gdx.audio.newSound(Gdx.files.internal("birb/sound.wav"));
+        jumpSound1 = Gdx.audio.newSound(Gdx.files.internal("birb/sound(1).wav"));
+        jumpSound2 = Gdx.audio.newSound(Gdx.files.internal("birb/sound(2).wav"));
+        jumpSound3 = Gdx.audio.newSound(Gdx.files.internal("birb/sound(3).wav"));
+        jumpSound4 = Gdx.audio.newSound(Gdx.files.internal("birb/sound(4).wav"));
 
         setHitBox();
     }
@@ -76,7 +80,7 @@ public class Birb {
         random = new Random();
         int randomSound = random.nextInt(5);
         if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && getPosistion().y < 470) {
-            if (randomSound == 0){
+            if (randomSound == 0) {
                 jumpSound.play();
             } else if (randomSound == 1) {
                 jumpSound1.play();
@@ -89,6 +93,13 @@ public class Birb {
             }
             velocity.y = Settings.JUMP;
             velocity.scl(0.4f);
+        }
+    }
+
+    public void deathAnimation(JumpyBirb game, Score score) {
+        deathSound.play();
+        if (getPosistion().y < 6) {
+            game.setScreen(new DeathScreen(game, score));
         }
     }
 
