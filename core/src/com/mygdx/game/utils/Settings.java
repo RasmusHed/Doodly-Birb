@@ -39,9 +39,4 @@ public class Settings {
             GAP_POSITION_FLUCTUATION = 230;
         }
     }
-
-    public static int getDELTATIME(){
-        return DELTATIME;
-    }
-
 }

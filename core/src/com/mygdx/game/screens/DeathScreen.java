@@ -17,7 +17,6 @@ public class DeathScreen implements Screen {
     final Score score;
     String highscore;
     OrthographicCamera camera;
-    private float elapsedTime = 0;
     private MyInputProcessor inputProcessor;
 
 
@@ -39,7 +38,6 @@ public class DeathScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        elapsedTime += delta;
         ScreenUtils.clear(0, 0, 0.2f, 1);
 
         camera.update();
@@ -62,15 +60,13 @@ public class DeathScreen implements Screen {
         game.batch.end();
 
 
-        if (elapsedTime > 0.5) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-                HighscoreList.writeHighscore(score);
-                game.setScreen(new MainMenuScreen(game));
-            } else if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                HighscoreList.writeHighscore(score);
-                game.setScreen(new GameScreen(game));
-                dispose();
-            }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            HighscoreList.writeHighscore(score);
+            game.setScreen(new MainMenuScreen(game));
+        } else if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            HighscoreList.writeHighscore(score);
+            game.setScreen(new GameScreen(game));
+            dispose();
         }
     }
 
