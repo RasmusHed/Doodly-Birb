@@ -6,7 +6,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.mygdx.game.Settings;
+import com.mygdx.game.utils.Settings;
 
 import java.util.Random;
 

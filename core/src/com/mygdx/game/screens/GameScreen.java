@@ -9,12 +9,11 @@ import com.mygdx.game.*;
 import com.mygdx.game.sprites.Birb;
 import com.mygdx.game.sprites.TubeBatch;
 import com.mygdx.game.sprites.TubePair;
-
-import java.util.Set;
+import com.mygdx.game.utils.Settings;
 
 public class GameScreen implements Screen {
     final JumpyBirb game;
-    final Deathscreen death;
+    final DeathScreen death;
     final TubeBatch tubes;
     final Score score;
     final Birb birb;
@@ -43,7 +42,7 @@ public class GameScreen implements Screen {
         //background = new Background(0, 0);
 
         deathSound = Gdx.audio.newSound(Gdx.files.internal("birb/deathsound.wav"));
-        death = new Deathscreen(game, score);
+        death = new DeathScreen(game, score);
     }
 
     @Override
@@ -75,7 +74,6 @@ public class GameScreen implements Screen {
         if (tubeFrame >= 2){
             tubeFrame = 0;
         }
-        System.out.println(tubeFrame);
 
         birb.gravity();
         birb.jump();
@@ -136,7 +134,7 @@ public class GameScreen implements Screen {
         for (TubePair tubePair : tubes.getTubes()) {
             if (birb.getBirbHitBox().overlaps(tubePair.getBottomTubeHitBox()) || birb.getBirbHitBox().overlaps(tubePair.getTopTubeHitBox())) {
                 deathSound.play();
-                game.setScreen(new Deathscreen(game, score));
+                game.setScreen(new DeathScreen(game, score));
             }
         }
     }

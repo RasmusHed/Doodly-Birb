@@ -13,6 +13,7 @@ public class JumpyBirb extends Game {
 	public SpriteBatch batch;
 	public BitmapFont titleFont;
 	public BitmapFont mainFont;
+	public BitmapFont miniFont;
 	public BitmapFont accentFont;
 
 	@Override

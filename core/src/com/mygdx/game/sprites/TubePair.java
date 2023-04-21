@@ -3,10 +3,9 @@ package com.mygdx.game.sprites;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Settings;
+import com.mygdx.game.utils.Settings;
 
 import java.util.Random;
-import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class TubePair {
