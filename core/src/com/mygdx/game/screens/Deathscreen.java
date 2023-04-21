@@ -6,9 +6,9 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.HighscoreList;
-import com.mygdx.game.Score;
 import com.mygdx.game.JumpyBirb;
 import com.mygdx.game.MyInputProcessor;
+import com.mygdx.game.Score;
 
 public class Deathscreen implements Screen {
     private static final int RETURN_X = 100;
@@ -46,24 +46,27 @@ public class Deathscreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.titleFont.draw(game.batch, "Highscore: " + highscore, 100, 400);
+        game.titleFont.draw(game.batch, "Highscore: " + highscore, 25, 460);
         if (HighscoreList.isScoreOnHighscoreList(score)) {
-            game.mainFont.draw(game.batch, "YOU HAVE A HIGHSCORE!!!!", 100, 300);
-            game.mainFont.draw(game.batch, "Enter your name: " + inputProcessor.getName(), 100, 240);
+            game.mainFont.draw(game.batch, "YOU HAVE A HIGHSCORE!!!!", 25, 360);
+            game.mainFont.draw(game.batch, "Enter your name: " + inputProcessor.getName(), 25, 300);
         } else {
-            game.mainFont.draw(game.batch, "Your score: " + score.getScore(), 100, 300);
-        game.mainFont.draw(game.batch, "Press space to play again", 100, 240);
+            game.mainFont.draw(game.batch, "Your score: " + score.getScore(), 25, 360);
         }
-        game.mainFont.draw(game.batch, "Return to main screen", RETURN_X, RETURN_Y);
+        game.mainFont.draw(game.batch, "Press anywhere/space", 25, 200);
+        game.mainFont.draw(game.batch, "to play again", 25, 140);
+        game.mainFont.draw(game.batch, "Press enter for main screen", 25, 80);
         inputProcessor.writePlayerName(score);
 
         game.batch.end();
 
 
-        if (elapsedTime > 0.5){
-            if (Gdx.input.justTouched() && Gdx.input.getX() >= RETURN_X && Gdx.input.getX() <= RETURN_X + 620 && Gdx.input.getY() >= RETURN_Y + 190 && Gdx.input.getY() <= RETURN_Y + 240) {
+        if (elapsedTime > 0.5) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+                HighscoreList.writeHighscore(score);
                 game.setScreen(new MainMenuScreen(game));
             } else if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+                HighscoreList.writeHighscore(score);
                 game.setScreen(new GameScreen(game));
                 dispose();
             }

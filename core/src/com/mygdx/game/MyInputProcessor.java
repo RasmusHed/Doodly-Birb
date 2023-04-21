@@ -77,8 +77,6 @@ public class MyInputProcessor implements InputProcessor {
                 } else if (name.length() == 0){
                     score.setPlayerName("---");
                 }
-                HighscoreList.writeHighscore(score);
-                System.out.println(score.toString());
             }
             if (Gdx.input.isKeyJustPressed(Input.Keys.BACKSPACE)) {
                 name = "";
