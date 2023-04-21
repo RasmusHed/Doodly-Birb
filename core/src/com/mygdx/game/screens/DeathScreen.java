@@ -10,7 +10,7 @@ import com.mygdx.game.JumpyBirb;
 import com.mygdx.game.MyInputProcessor;
 import com.mygdx.game.Score;
 
-public class Deathscreen implements Screen {
+public class DeathScreen implements Screen {
     private static final int RETURN_X = 100;
     private static final int RETURN_Y = 150;
     final JumpyBirb game;
@@ -21,7 +21,7 @@ public class Deathscreen implements Screen {
     private MyInputProcessor inputProcessor;
 
 
-    public Deathscreen(final JumpyBirb game, final Score score) {
+    public DeathScreen(final JumpyBirb game, final Score score) {
         this.game = game;
         this.score = score;
 
@@ -46,11 +46,12 @@ public class Deathscreen implements Screen {
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.titleFont.draw(game.batch, "Highscore: " + highscore, 25, 460);
         if (HighscoreList.isScoreOnHighscoreList(score)) {
-            game.mainFont.draw(game.batch, "YOU HAVE A HIGHSCORE!!!!", 25, 360);
+            game.mainFont.draw(game.batch, "You're on the scoreboard!", 25, 460);
+            game.mainFont.draw(game.batch, "Your score: " + score.getScore(), 25, 360);
             game.mainFont.draw(game.batch, "Enter your name: " + inputProcessor.getName(), 25, 300);
         } else {
+            game.titleFont.draw(game.batch, "Highscore: " + highscore, 25, 460);
             game.mainFont.draw(game.batch, "Your score: " + score.getScore(), 25, 360);
         }
         game.mainFont.draw(game.batch, "Press anywhere/space", 25, 200);

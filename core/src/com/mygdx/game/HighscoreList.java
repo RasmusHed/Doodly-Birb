@@ -12,6 +12,9 @@ public class HighscoreList {
 
     public static boolean isHighscoreBadFormat() {
         boolean badFormat = false;
+        if (getHighscores().length == 0) {
+            badFormat = true;
+        }
         for (String parsedHighscore : getHighscores()) {
             String[] nameAndScore = parsedHighscore.split(": ");
             if (nameAndScore[0].length() != 3) {
@@ -20,10 +23,10 @@ public class HighscoreList {
             try {
                 Integer.parseInt(nameAndScore[1]);
             } catch (NumberFormatException e) {
-                System.out.println("Highscore is not a number!");
+                System.err.println("Highscore is not a number!");
                 badFormat = true;
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Highscores must be a name and a score");
+                System.err.println("Highscores must be a name and a score");
                 badFormat = true;
             }
         }
