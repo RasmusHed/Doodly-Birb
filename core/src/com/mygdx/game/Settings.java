@@ -20,7 +20,7 @@ public class Settings {
     public static final float GRAVITY = -0.234f;
     public static final float JUMP = 15;
     public static final int BIRB_HITBOX_HEIGHT = 90;
-    public static final int BIRB_HITBOX_WIDTH = 90;
+    public static final int BIRB_HITBOX_WIDTH = 80;
 
     public static void setDifficulty(String difficulty){
         if (difficulty.equals("EASY")){

@@ -65,10 +65,10 @@ public class TubePair {
     private void setHitBoxPosition() {
         topTubeHitBox = new Rectangle(getTopTubePosition().x,
                 getTopTubePosition().y,
-                Settings.TUBE_WIDTH - 50, Settings.TUBE_HEIGHT - 30);
+                Settings.TUBE_WIDTH - 50, Settings.TUBE_HEIGHT - 20);
         bottomTubeHitBox = new Rectangle(getBottomTubePosition().x,
                 getBottomTubePosition().y,
-                Settings.TUBE_WIDTH - 50, Settings.TUBE_HEIGHT - 30);
+                Settings.TUBE_WIDTH - 50, Settings.TUBE_HEIGHT - 20);
     }
 
     private void setTubePairPosition(float x) {
