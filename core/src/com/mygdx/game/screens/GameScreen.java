@@ -85,20 +85,20 @@ public class GameScreen implements Screen {
         game.titleFont.draw(game.batch, "" + score.getScore(), score.getScorePosition().x, score.getScorePosition().y);
 
         //draw the birb
-        game.batch.draw(birb.getTexture(), birb.getPosistion().x, birb.getPosistion().y);
+        game.batch.draw(birb.getTexture(birbDead), birb.getPosition().x, birb.getPosition().y);
         //stop moving camera and birb when birb dies
         if (!birbDead) {
         //camera moves to the right in sync (x-position + 1)
         //which makes it look like the tubes move to the left
         camera.position.x += delta * Settings.DELTATIME;
         //set update the rectangle position and move birb one pixel to the right
-        birb.setBirbRectangle(birb.getPosistion().x, birb.getPosistion().y);
-        birb.setXPosistion(birb.getPosistion().x += delta * Settings.DELTATIME);
+        birb.setBirbRectangle(birb.getPosition().x, birb.getPosition().y);
+        birb.setXPosistion(birb.getPosition().x += delta * Settings.DELTATIME);
         score.setScorePosition(score.getScorePosition().x += delta * Settings.DELTATIME);
         birb.jump();
         }
         camera.update();
-        score.setScore(birb.getPosistion().x);
+        score.setScore(birb.getPosition().x);
         game.batch.end();
     }
 

@@ -15,19 +15,23 @@ import java.util.Random;
 
 
 public class Birb {
-
     private Rectangle birbHitBox;
     private final Texture birb;
+    private final Texture jumpingBirb;
+    private final Texture deadBirb;
     private Vector3 posistion;
     private Vector3 velocity;
     private final Sound jumpSound, jumpSound1, jumpSound2, jumpSound3, jumpSound4;
     private Random random;
     private final Sound deathSound;
+    private float lastPos = 700;
 
     public Birb(int x, int y) {
         posistion = new Vector3(x, y, 0);
         velocity = new Vector3(10, 0, 0);
         birb = new Texture("birb/birb.png");
+        jumpingBirb = new Texture("birb/birb_2.png");
+        deadBirb = new Texture("birb/birb_dead.png");
         deathSound = Gdx.audio.newSound(Gdx.files.internal("birb/deathsound.wav"));
         jumpSound = Gdx.audio.newSound(Gdx.files.internal("birb/sound.wav"));
         jumpSound1 = Gdx.audio.newSound(Gdx.files.internal("birb/sound(1).wav"));
@@ -38,11 +42,21 @@ public class Birb {
         setHitBox();
     }
 
-    public Texture getTexture() {
-        return birb;
+    public Texture getTexture(boolean dead) {
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ANY_KEY)) {
+            lastPos = getPosition().y;
+        }
+        if (dead) {
+            return deadBirb;
+        } else if (lastPos < getPosition().y - 10) {
+            return jumpingBirb;
+        } else {
+            return birb;
+        }
     }
 
-    public Vector3 getPosistion() {
+    public Vector3 getPosition() {
         return posistion;
     }
 
@@ -65,8 +79,8 @@ public class Birb {
     }
 
     private void setHitBox() {
-        birbHitBox = new Rectangle(getPosistion().x,
-                getPosistion().y,
+        birbHitBox = new Rectangle(getPosition().x,
+                getPosition().y,
                 Settings.BIRB_HITBOX_WIDTH,
                 Settings.BIRB_HITBOX_HEIGHT);
     }
@@ -77,34 +91,38 @@ public class Birb {
     }
 
     public void jump() {
-        random = new Random();
-        int randomSound = random.nextInt(5);
-        if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && getPosistion().y < 470) {
-            if (randomSound == 0) {
-                jumpSound.play();
-            } else if (randomSound == 1) {
-                jumpSound1.play();
-            } else if (randomSound == 2) {
-                jumpSound2.play();
-            } else if (randomSound == 3) {
-                jumpSound3.play();
-            } else {
-                jumpSound4.play();
-            }
+        if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && getPosition().y < 470) {
+            jumpingSound();
             velocity.y = Settings.JUMP;
             velocity.scl(0.4f);
         }
     }
 
+    private void jumpingSound() {
+        random = new Random();
+        int randomSound = random.nextInt(5);
+        if (randomSound == 0) {
+            jumpSound.play();
+        } else if (randomSound == 1) {
+            jumpSound1.play();
+        } else if (randomSound == 2) {
+            jumpSound2.play();
+        } else if (randomSound == 3) {
+            jumpSound3.play();
+        } else {
+            jumpSound4.play();
+        }
+    }
+
     public void deathAnimation(JumpyBirb game, Score score) {
         deathSound.play();
-        if (getPosistion().y < 6) {
+        if (getPosition().y < 6) {
             game.setScreen(new DeathScreen(game, score));
         }
     }
 
     public void cantGoBelowScreen() {
-        if (getPosistion().y < 5) {
+        if (getPosition().y < 5) {
             setYPosistion(5);
         }
     }
