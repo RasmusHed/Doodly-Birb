@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mygdx.game.JumpyBirb;
-import com.mygdx.game.Settings;
+import com.mygdx.game.utils.Settings;
 import com.mygdx.game.sprites.Background;
 
 public class OptionsScreen implements Screen {

@@ -1,19 +1,21 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.mygdx.game.screens.MainMenuScreen;
+import com.mygdx.game.HighscoreList;
+import com.mygdx.game.JumpyBirb;
+import com.mygdx.game.utils.Settings;
 import com.mygdx.game.sprites.Background;
 
-public class TopFiveScores implements Screen {
+public class HighscoreScreen implements Screen {
     final JumpyBirb game;
     final Background background;
 
     OrthographicCamera camera;
 
-    public TopFiveScores(final JumpyBirb game) {
+    public HighscoreScreen(final JumpyBirb game) {
         this.game = game;
 
         background = new Background(0, 0);

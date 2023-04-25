@@ -5,10 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mygdx.game.HighscoreList;
-import com.mygdx.game.TopFiveScores;
 import com.mygdx.game.sprites.Background;
 import com.mygdx.game.JumpyBirb;
-import com.mygdx.game.Settings;
+import com.mygdx.game.utils.Settings;
 
 public class MainMenuScreen implements Screen {
     private static final int HIGHSCORE_X = 270;
@@ -86,7 +85,7 @@ public class MainMenuScreen implements Screen {
     public static void manuOptions(final JumpyBirb game) {
         // Highscore button
         if (Gdx.input.justTouched() && Gdx.input.getX() >= HIGHSCORE_X && Gdx.input.getX() <= HIGHSCORE_X + 260 && Gdx.input.getY() >= HIGHSCORE_Y - 140 && Gdx.input.getY() <= HIGHSCORE_Y - 90) {
-            game.setScreen(new TopFiveScores(game));
+            game.setScreen(new HighscoreScreen(game));
         }
         // Options button
         else if (Gdx.input.justTouched() && Gdx.input.getX() >= OPTIONS_X && Gdx.input.getX() <= OPTIONS_X + 210 && Gdx.input.getY() >= OPTIONS_Y + 30 && Gdx.input.getY() <= OPTIONS_Y + 70) {

@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.utils;
 
 public class Settings {
     //DELTA
@@ -39,9 +39,4 @@ public class Settings {
             GAP_POSITION_FLUCTUATION = 230;
         }
     }
-
-    public static int getDELTATIME(){
-        return DELTATIME;
-    }
-
 }

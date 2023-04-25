@@ -3,7 +3,7 @@ package com.mygdx.game.sprites;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.JumpyBirb;
-import com.mygdx.game.Settings;
+import com.mygdx.game.utils.Settings;
 
 public class TubeBatch {
     private Array<TubePair> tubes;

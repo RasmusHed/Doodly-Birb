@@ -10,18 +10,17 @@ import com.mygdx.game.JumpyBirb;
 import com.mygdx.game.MyInputProcessor;
 import com.mygdx.game.Score;
 
-public class Deathscreen implements Screen {
+public class DeathScreen implements Screen {
     private static final int RETURN_X = 100;
     private static final int RETURN_Y = 150;
     final JumpyBirb game;
     final Score score;
     String highscore;
     OrthographicCamera camera;
-    private float elapsedTime = 0;
     private MyInputProcessor inputProcessor;
 
 
-    public Deathscreen(final JumpyBirb game, final Score score) {
+    public DeathScreen(final JumpyBirb game, final Score score) {
         this.game = game;
         this.score = score;
 
@@ -39,18 +38,18 @@ public class Deathscreen implements Screen {
 
     @Override
     public void render(float delta) {
-        elapsedTime += delta;
         ScreenUtils.clear(0, 0, 0.2f, 1);
 
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
-        game.titleFont.draw(game.batch, "Highscore: " + highscore, 25, 460);
         if (HighscoreList.isScoreOnHighscoreList(score)) {
-            game.mainFont.draw(game.batch, "YOU HAVE A HIGHSCORE!!!!", 25, 360);
+            game.mainFont.draw(game.batch, "You're on the scoreboard!", 25, 460);
+            game.mainFont.draw(game.batch, "Your score: " + score.getScore(), 25, 360);
             game.mainFont.draw(game.batch, "Enter your name: " + inputProcessor.getName(), 25, 300);
         } else {
+            game.titleFont.draw(game.batch, "Highscore: " + highscore, 25, 460);
             game.mainFont.draw(game.batch, "Your score: " + score.getScore(), 25, 360);
         }
         game.mainFont.draw(game.batch, "Press anywhere/space", 25, 200);
@@ -61,15 +60,13 @@ public class Deathscreen implements Screen {
         game.batch.end();
 
 
-        if (elapsedTime > 0.5) {
-            if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
-                HighscoreList.writeHighscore(score);
-                game.setScreen(new MainMenuScreen(game));
-            } else if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-                HighscoreList.writeHighscore(score);
-                game.setScreen(new GameScreen(game));
-                dispose();
-            }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ENTER)) {
+            HighscoreList.writeHighscore(score);
+            game.setScreen(new MainMenuScreen(game));
+        } else if (Gdx.input.justTouched() || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            HighscoreList.writeHighscore(score);
+            game.setScreen(new GameScreen(game));
+            dispose();
         }
     }
 
