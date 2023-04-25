@@ -86,7 +86,7 @@ public class GameScreen implements Screen {
         //game.batch.draw(background.getBackgroundImage(), background.getBackgroundPosition().x, background.getBackgroundPosition().y);
         //background.setBackgroundPosition(background.getBackgroundPosition().x += delta * Settings.DELTATIME);
 
-        ScreenUtils.clear(0.9f, 0.9f, 0.9f, 0.7f);
+        ScreenUtils.clear(0.97f, 0.95f, 0.95f, 1);
 
         //draw the tubes
         tubes.spawnTubes(game, tubeFrame);
