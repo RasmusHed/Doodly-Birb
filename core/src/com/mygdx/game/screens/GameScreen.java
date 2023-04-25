@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.JumpyBirb;
 import com.mygdx.game.Score;
+import com.mygdx.game.sprites.Background;
 import com.mygdx.game.sprites.Birb;
 import com.mygdx.game.sprites.TubeBatch;
 import com.mygdx.game.sprites.TubePair;
@@ -18,7 +19,7 @@ public class GameScreen implements Screen {
     final Birb birb;
     boolean birbDead;
     final OrthographicCamera camera;
-    //final Background background;
+    final Background background;
     private float elapsedTime = 0;
 
     public GameScreen(JumpyBirb game) {
@@ -37,7 +38,7 @@ public class GameScreen implements Screen {
         tubes = new TubeBatch();
 
         // Create the background
-        //background = new Background(0, 0);
+        background = new Background(0, 0);
         deathScreen = new DeathScreen(game, score);
     }
 
@@ -71,9 +72,8 @@ public class GameScreen implements Screen {
         birb.cantGoBelowScreen();
         checkBirbHitTubes();
 
-        //draw the background and move it one pixel to the right
-        //game.batch.draw(background.getBackgroundImage(), background.getBackgroundPosition().x, background.getBackgroundPosition().y);
-        //background.setBackgroundPosition(background.getBackgroundPosition().x += delta * Settings.DELTATIME);
+        //draw the background
+        game.batch.draw(background.getBackgroundImageBack(), background.getBackgroundImageBackPosition().x, background.getBackgroundImageBackPosition().y);
 
         ScreenUtils.clear(0.97f, 0.95f, 0.95f, 1);
 
@@ -81,6 +81,7 @@ public class GameScreen implements Screen {
         tubes.spawnTubes(game, tubeFrame);
         tubes.respawnTubesWhenOutOfScreen(camera);
 
+        game.batch.draw(background.getBackgroundImageFront(), background.getBackgroundImageFrontPosition().x, background.getBackgroundImageFrontPosition().y);
         //write score to gamescreen
         game.titleFont.draw(game.batch, "" + score.getScore(), score.getScorePosition().x, score.getScorePosition().y);
 
@@ -88,14 +89,17 @@ public class GameScreen implements Screen {
         game.batch.draw(birb.getTexture(birbDead), birb.getPosition().x, birb.getPosition().y);
         //stop moving camera and birb when birb dies
         if (!birbDead) {
-        //camera moves to the right in sync (x-position + 1)
-        //which makes it look like the tubes move to the left
-        camera.position.x += delta * Settings.DELTATIME;
-        //set update the rectangle position and move birb one pixel to the right
-        birb.setBirbRectangle(birb.getPosition().x, birb.getPosition().y);
-        birb.setXPosistion(birb.getPosition().x += delta * Settings.DELTATIME);
-        score.setScorePosition(score.getScorePosition().x += delta * Settings.DELTATIME);
-        birb.jump();
+            //camera moves to the right in sync (x-position + 1)
+            //which makes it look like the tubes move to the left
+            camera.position.x += delta * Settings.DELTATIME;
+            //background moves to the right in sync (x-position + 1)
+            background.setBackgroundImageBackPosition(background.getBackgroundImageBackPosition().x += delta * Settings.DELTATIME);
+            background.setBackgroundImageFrontPosition(background.getBackgroundImageFrontPosition().x += delta * Settings.DELTATIME);
+            //set update the rectangle position and move birb one pixel to the right
+            birb.setBirbRectangle(birb.getPosition().x, birb.getPosition().y);
+            birb.setXPosistion(birb.getPosition().x += delta * Settings.DELTATIME);
+            score.setScorePosition(score.getScorePosition().x += delta * Settings.DELTATIME);
+            birb.jump();
         }
         camera.update();
         score.setScore(birb.getPosition().x);
