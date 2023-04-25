@@ -9,12 +9,14 @@ import com.mygdx.game.HighscoreList;
 import com.mygdx.game.JumpyBirb;
 import com.mygdx.game.MyInputProcessor;
 import com.mygdx.game.Score;
+import com.mygdx.game.sprites.Background;
 
 public class DeathScreen implements Screen {
     private static final int RETURN_X = 100;
     private static final int RETURN_Y = 150;
     final JumpyBirb game;
     final Score score;
+    final Background background;
     String highscore;
     OrthographicCamera camera;
     private MyInputProcessor inputProcessor;
@@ -23,6 +25,7 @@ public class DeathScreen implements Screen {
     public DeathScreen(final JumpyBirb game, final Score score) {
         this.game = game;
         this.score = score;
+        background = new Background(0, 0);
 
         String[] highscoreArray = HighscoreList.getHighscores();
         highscore = highscoreArray[0].split(": ")[1];
@@ -38,12 +41,11 @@ public class DeathScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        ScreenUtils.clear(0, 0, 0.2f, 1);
-
         camera.update();
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin();
+        game.batch.draw(background.getBackgroundImage(), background.getBackgroundPosition().x, background.getBackgroundPosition().y);
         if (HighscoreList.isScoreOnHighscoreList(score)) {
             game.mainFont.draw(game.batch, "You're on the scoreboard!", 25, 460);
             game.mainFont.draw(game.batch, "Your score: " + score.getScore(), 25, 360);

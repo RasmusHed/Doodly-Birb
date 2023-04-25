@@ -12,7 +12,7 @@ public class Background {
 
     public Background(float x, float y) {
         spriteBatch = new SpriteBatch();
-        backgroundImage = new Texture("firstBackground.png");
+        backgroundImage = new Texture("paperBackground.png");
         backgroundPosition = new Vector2(x,y);
     }
 
