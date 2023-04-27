@@ -72,16 +72,16 @@ public class GameScreen implements Screen {
         birb.cantGoBelowScreen();
         checkBirbHitTubes();
 
+        ScreenUtils.clear(0.97f, 0.95f, 0.95f, 1);
         //draw the background
         game.batch.draw(background.getBackgroundImageBack(), background.getBackgroundImageBackPosition().x, background.getBackgroundImageBackPosition().y);
-
-        ScreenUtils.clear(0.97f, 0.95f, 0.95f, 1);
 
         //draw the tubes
         tubes.spawnTubes(game, tubeFrame);
         tubes.respawnTubesWhenOutOfScreen(camera);
 
         game.batch.draw(background.getBackgroundImageFront(), background.getBackgroundImageFrontPosition().x, background.getBackgroundImageFrontPosition().y);
+
         //write score to gamescreen
         game.titleFont.draw(game.batch, "" + score.getScore(), score.getScorePosition().x, score.getScorePosition().y);
 

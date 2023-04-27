@@ -15,8 +15,8 @@ public class Background {
 
     public Background(float x, float y) {
         backgroundImage = new Texture("background/paperBackground.png");
-        backgroundImageFront = new Texture("background/paper_background_front.png");
-        backgroundImageBack = new Texture("background/paper_background.jpg");
+        backgroundImageFront = new Texture("background/game_frame.png");
+        backgroundImageBack = new Texture("background/game_paperBackground.png");
         backgroundPosition = new Vector2(x,y);
         backgroundImageFrontPosition = new Vector2(x,y);
         backgroundImageBackPosition = new Vector2(x,y);
