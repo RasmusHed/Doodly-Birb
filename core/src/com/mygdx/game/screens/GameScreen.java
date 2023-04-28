@@ -38,7 +38,7 @@ public class GameScreen implements Screen {
         tubes = new TubeBatch();
 
         // Create the background
-        background = new Background(0, 0);
+        background = new Background(-7, 0);
         deathScreen = new DeathScreen(game, score);
     }
 
