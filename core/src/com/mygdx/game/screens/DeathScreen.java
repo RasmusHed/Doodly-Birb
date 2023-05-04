@@ -4,9 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.HighscoreList;
-import com.mygdx.game.JumpyBirb;
+import com.mygdx.game.DoodlyBirb;
 import com.mygdx.game.MyInputProcessor;
 import com.mygdx.game.Score;
 import com.mygdx.game.sprites.Background;
@@ -14,7 +13,7 @@ import com.mygdx.game.sprites.Background;
 public class DeathScreen implements Screen {
     private static final int RETURN_X = 100;
     private static final int RETURN_Y = 150;
-    final JumpyBirb game;
+    final DoodlyBirb game;
     final Score score;
     final Background background;
     String highscore;
@@ -22,7 +21,7 @@ public class DeathScreen implements Screen {
     private MyInputProcessor inputProcessor;
 
 
-    public DeathScreen(final JumpyBirb game, final Score score) {
+    public DeathScreen(final DoodlyBirb game, final Score score) {
         this.game = game;
         this.score = score;
         background = new Background(0, 0);

@@ -3,7 +3,7 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.JumpyBirb;
+import com.mygdx.game.DoodlyBirb;
 import com.mygdx.game.Score;
 import com.mygdx.game.sprites.Background;
 import com.mygdx.game.sprites.Birb;
@@ -12,7 +12,7 @@ import com.mygdx.game.sprites.TubePair;
 import com.mygdx.game.utils.Settings;
 
 public class GameScreen implements Screen {
-    final JumpyBirb game;
+    final DoodlyBirb game;
     final DeathScreen deathScreen;
     final TubeBatch tubes;
     final Score score;
@@ -22,7 +22,7 @@ public class GameScreen implements Screen {
     final Background background;
     private float elapsedTime = 0;
 
-    public GameScreen(JumpyBirb game) {
+    public GameScreen(DoodlyBirb game) {
         this.game = game;
 
         camera = new OrthographicCamera();

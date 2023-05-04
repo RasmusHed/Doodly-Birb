@@ -2,7 +2,7 @@ package com.mygdx.game.sprites;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.JumpyBirb;
+import com.mygdx.game.DoodlyBirb;
 import com.mygdx.game.utils.Settings;
 
 public class TubeBatch {
@@ -19,7 +19,7 @@ public class TubeBatch {
     }
 
 
-    public void spawnTubes(JumpyBirb game, int tubeFrame) {
+    public void spawnTubes(DoodlyBirb game, int tubeFrame) {
         for (TubePair tubePair : getTubes()) {
             game.batch.draw(tubePair.getTopTubeTexture(tubeFrame), tubePair.getTopTubePosition().x, tubePair.getTopTubePosition().y);
             game.batch.draw(tubePair.getBottomTubeTexture(tubeFrame), tubePair.getBottomTubePosition().x, tubePair.getBottomTubePosition().y);

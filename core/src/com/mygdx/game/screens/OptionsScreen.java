@@ -3,7 +3,7 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.mygdx.game.JumpyBirb;
+import com.mygdx.game.DoodlyBirb;
 import com.mygdx.game.utils.Settings;
 import com.mygdx.game.sprites.Background;
 
@@ -14,12 +14,12 @@ public class OptionsScreen implements Screen {
         private static final int MEDIUM_Y = 210;
         private static final int HARD_X = 270;
         private static final int HARD_Y = 130;
-        final JumpyBirb game;
+        final DoodlyBirb game;
         final Background background;
 
         OrthographicCamera camera;
 
-    public OptionsScreen(final JumpyBirb game) {
+    public OptionsScreen(final DoodlyBirb game) {
             this.game = game;
 
             background = new Background(0, 0);

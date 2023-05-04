@@ -6,7 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.mygdx.game.HighscoreList;
 import com.mygdx.game.sprites.Background;
-import com.mygdx.game.JumpyBirb;
+import com.mygdx.game.DoodlyBirb;
 import com.mygdx.game.utils.Settings;
 
 public class MainMenuScreen implements Screen {
@@ -16,12 +16,12 @@ public class MainMenuScreen implements Screen {
     private static final int OPTIONS_Y = 230;
     private static final int QUIT_X = 270;
     private static final int QUIT_Y = 150;
-    final JumpyBirb game;
+    final DoodlyBirb game;
     final Background background;
 
     OrthographicCamera camera;
 
-    public MainMenuScreen(final JumpyBirb game) {
+    public MainMenuScreen(final DoodlyBirb game) {
         this.game = game;
 
         background = new Background(0, 0);
@@ -47,7 +47,7 @@ public class MainMenuScreen implements Screen {
         game.batch.begin();
 
         game.batch.draw(background.getBackgroundImage(), background.getBackgroundPosition().x, background.getBackgroundPosition().y);
-        game.titleFont.draw(game.batch, "JUMPY BIRB", 100, 420);
+        game.titleFont.draw(game.batch, "DOODLY BIRB", 100, 420);
         game.mainFont.draw(game.batch, "Highscore", HIGHSCORE_X, HIGHSCORE_Y);
         game.mainFont.draw(game.batch, "Options", OPTIONS_X, OPTIONS_Y);
         game.mainFont.draw(game.batch, "Quit", QUIT_X, QUIT_Y);
@@ -82,7 +82,7 @@ public class MainMenuScreen implements Screen {
 
     }
 
-    public static void manuOptions(final JumpyBirb game) {
+    public static void manuOptions(final DoodlyBirb game) {
         // Highscore button
         if (Gdx.input.justTouched() && Gdx.input.getX() >= HIGHSCORE_X && Gdx.input.getX() <= HIGHSCORE_X + 260 && Gdx.input.getY() >= HIGHSCORE_Y - 140 && Gdx.input.getY() <= HIGHSCORE_Y - 90) {
             game.setScreen(new HighscoreScreen(game));

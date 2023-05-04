@@ -6,7 +6,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.mygdx.game.JumpyBirb;
+import com.mygdx.game.DoodlyBirb;
 import com.mygdx.game.Score;
 import com.mygdx.game.screens.DeathScreen;
 import com.mygdx.game.utils.Settings;
@@ -114,7 +114,7 @@ public class Birb {
         }
     }
 
-    public void deathAnimation(JumpyBirb game, Score score) {
+    public void deathAnimation(DoodlyBirb game, Score score) {
         deathSound.play();
         if (getPosition().y < 6) {
             game.setScreen(new DeathScreen(game, score));
