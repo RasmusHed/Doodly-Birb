@@ -1,2 +1,2 @@
 # Doodly-Birb
-Download the game at: [DoodlyBirb.zip](https://github.com/RasmusHed/Doodly-Birb/files/11406863/DoodlyBirb.zip)
+Download the game at: https://drive.google.com/file/d/1aKtSgrIXvH_WL64tagDbPQZtedzga71K/view?usp=sharing
